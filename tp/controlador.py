@@ -1,6 +1,6 @@
-# ##############################################
-# CONTROLADOR
-# ##############################################
+'''
+	Modulo controlador. 
+'''
 
 from tkinter import Tk
 from modelo import Modelo

@@ -15,14 +15,19 @@ class Vista():
 	# TODO 2: Repetir esta misma funcion pero para modificar/eliminar
 	def alta_aux(self, nombre:StringVar, email:StringVar, nota:DoubleVar, tree: ttk.Treeview, alta):
 		''' "alta" es una funcion que viene del modelo '''
-		confirmacion_alta = alta(nombre.get(), email.get(), nota.get(), tree) #type: bool
-		if confirmacion_alta:
-			print('ALTA CORRECTA')
-			showinfo('Mensaje','Alta correcta')
-			self.limpiar_campos(nombre, email, nota)
-		else:
-			print('ALTA FALLIDA')
-			showwarning('Mensaje','Alta fallida')
+
+		try:
+			confirmacion_alta = alta(nombre.get(), email.get(), nota.get(), tree) #type: bool
+			if confirmacion_alta:
+				print('ALTA CORRECTA')
+				showinfo('Mensaje','Alta correcta')
+				self.limpiar_campos(nombre, email, nota)
+			else:
+				print('ALTA FALLIDA')
+				showwarning('Mensaje','Alta fallida')
+		except Exception as e:
+			showwarning('Mensaje', f'Alta fallida. Error en el ingreso de datos.')
+			print(f'Excepcion: {e}')
 
 	def crear_treeview(self, root: Tk) -> ttk.Treeview:
 		# --------------------------------------------------

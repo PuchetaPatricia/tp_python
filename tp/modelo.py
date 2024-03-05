@@ -125,7 +125,8 @@ class Modelo():
 		
 		print('valor_seleccionado',valor_seleccionado)   #('I005',)
 		item = tree.item(valor_seleccionado)
-		print('item',item)    #{'text': 5, 'image': '', 'values': ['daSDasd', '13.0', '2.0'], 'open': 0, 'tags': ''}
+		print('item',item)    # item {'text': 26, 'image': '', 'values': ['Alfredo Gomez', 'GAlfredo@s': ''}
+
 		print("item['text']",item['text'])
 		mi_id = item['text']
 		print(f"Valores del item con id = {item['text']}:")
