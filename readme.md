@@ -1,8 +1,8 @@
 # readme
+WIP
 
 ## instalacion
-Se recomienda utilizar la version de python 3.10.11
-
+Se recomienda utilizar la version de python 3.11.7
 
 ## colaboradores
 ...
