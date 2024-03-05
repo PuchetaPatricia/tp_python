@@ -2,105 +2,71 @@
 # MODELO
 # ##############################################
 from tkinter import ttk
-import sqlite3
 import re
+from peewee import *
+
+base_sqlite = SqliteDatabase('base_sqlite.db')
+
+class BaseModel(Model):
+    class Meta:
+        database = base_sqlite
+
+class Estudiantes(BaseModel):
+    # id = IntegerField(primary_key = True, )  # no es necesario, el ORM ya le agrega un id llamado 'id' por defecto 
+    nombre = CharField()
+    email = CharField()
+    nota = FloatField()
+
+base_sqlite.connect()
+base_sqlite.create_tables([Estudiantes])
+
+	
+# mi modelo original
+
+# id integer PRIMARY KEY AUTOINCREMENT,
+# nombre text NOT NULL,
+# email text NOT NULL,
+# nota real
+
 
 
 class ManejadorBd():
-	BD = 'estudiantes.db'
-
-	def __init__(self) -> None:
-		self.con = self.iniciar_conexion()
-		self.crear_tabla()
-
-	def iniciar_conexion(self):
-		con = sqlite3.connect(self.BD)
-		return con
-	
-	def crear_tabla(self):
-		try:
-			cursor = self.con.cursor() 
-			# DLL de la tabla
-			sql = """
-			CREATE TABLE IF NOT EXISTS estudiantes
-			(
-				id integer PRIMARY KEY AUTOINCREMENT,
-				nombre text NOT NULL,
-				email text NOT NULL,
-				nota real
-			)
-			"""
-			cursor.execute(sql)
-			self.con.commit()	
-		except Exception as e:
-			print("Hay un error:", e)
-
-	def borrar_tabla(self):
-		cursor = self.con.cursor() 
-		# DLL de la tabla
-		sql = 'DROP TABLE IF EXISTS estudiantes'
-		cursor.execute(sql)
-		self.con.commit()
-
 	def resetear_tabla(self):
-		self.borrar_tabla()
-		self.crear_tabla()
+		base_sqlite.drop_tables([Estudiantes])
+		base_sqlite.create_tables([Estudiantes])
 		print('reseteando BD y actualizando vista')
 		
-
 	def insertar_datos_default(self):
-		cursor = self.con.cursor() 
-		# DML 
-		sql = """
-		INSERT INTO estudiantes (nombre, email, nota)
-			VALUES('Alan Martinez', 'AlanMartinez@hotmail.com', 6.5),
-			('Pedro Villanueva', 'PVNueva66@gmail.com', 9),
-			('Maria Benitez', 'Mbtez@gmail.com', 10),
-			('Gustavo Romanov', 'tavo_14@outlook.com.ar', 2.5),
-			('Josefina Cordara', 'JCor95@yahoo.com', 0),
-			('Alfredo Gomez', 'GAlfredo@outlook.com.br', 8);
-		"""
-		cursor.execute(sql)
-		self.con.commit()
+		self.insertar_datos('Alan Martinez', 'AlanMartinez@hotmail.com', 6.5)
+		self.insertar_datos('Pedro Villanueva', 'PVNueva66@gmail.com', 9)
+		self.insertar_datos('Maria Benitez', 'Mbtez@gmail.com', 10)
+		self.insertar_datos('Gustavo Romanov', 'tavo_14@outlook.com.ar', 2.5)
+		self.insertar_datos('Josefina Cordara', 'JCor95@yahoo.com', 0)
+		self.insertar_datos('Alfredo Gomez', 'GAlfredo@outlook.com.br', 8)
 		
-
 	def traer_datos(self):
-		sql = "SELECT * FROM estudiantes ORDER BY id DESC"
-		cursor = self.con.cursor()
-		datos = cursor.execute(sql)
-		resultado = datos.fetchall()
+		resultado = Estudiantes.select()
+		print('type(resultado):', type(resultado)) # test       <class 'peewee.ModelSelect'>
 		print('resultado', resultado) # test
 		return resultado
 	
 	def insertar_datos(self, nombre:str, email:str, nota:float):
-		cursor = self.con.cursor()
-		data = (nombre, email, nota)
-		sql = "INSERT INTO estudiantes(nombre, email, nota) VALUES(?, ?, ?)"
-		cursor.execute(sql, data)
-		self.con.commit()
+		estudiante = Estudiantes()
+		estudiante.nombre = nombre
+		estudiante.email = email
+		estudiante.nota = nota
+		estudiante.save()
 
 	def modificar_datos(self, id, nombre:str, email:str, nota:float):
-		cursor = self.con.cursor()
-		#mi_id = int(mi_id)
-		#data = (mi_id,)
-		sql = f""" 
-		UPDATE estudiantes 
-		SET nombre = '{nombre}',
-			email = '{email}',
-			nota = {nota}
-		WHERE id = {id};
-		"""
-		print('sql ejecutado: ',sql)
-		cursor.execute(sql)
-		self.con.commit()
+		actualizar = Estudiantes.update(nombre=nombre, email=email, nota=nota).where(Estudiantes.id == id)
+		actualizar.execute()
 
 	def eliminar_datos(self, id):
-		cursor = self.con.cursor()
-		#mi_id = int(mi_id)
-		data = (id,)
-		sql = "DELETE FROM estudiantes WHERE id = ?;"
-		cursor.execute(sql, data)
-		self.con.commit()
+		#registro_a_borrar = Estudiantes.get( Estudiantes.id == id ) #type: Estudiantes
+		#registro_a_borrar.delete_instance()
+		
+		# encontre este metodo 
+		Estudiantes.delete_by_id(id)
 
 class Modelo():
 	def __init__(self):
@@ -117,8 +83,7 @@ class Modelo():
 
 		for fila in resultado:
 			print('fila',fila)
-			mi_treeview.insert("", 0, text=fila[0], values=(fila[1], fila[2], fila[3]))
-
+			mi_treeview.insert("", 0, text=fila.id, values=(fila.nombre, fila.email, fila.nota))
 
 
 	# TODO 1: Areglar return para que devuelva el mensaje del print en una warning.
@@ -138,7 +103,6 @@ class Modelo():
 		self.actualizar_treeview(tree)
 		return True
 			
-
 	def validar_email(self, email:str):
 		''' 
 		Devuelve algo analogo a TRUE si el email es una 
@@ -146,9 +110,7 @@ class Modelo():
 		'''
 		PATRON = '^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$'  #regex para el email
 		return re.match(PATRON, email) 
-
 			
-
 	def modificar(self, nombre:str, email:str, nota:float, tree: ttk.Treeview): # TODO
 		print('Entrando a MODIFICAR')
 
