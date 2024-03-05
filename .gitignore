@@ -1,3 +1,5 @@
+# gitignore manual
+
 # notas/archivos locales
 local/
 
@@ -9,6 +11,7 @@ local/
 
 
 
+###############################################################################
 # gitignore autogenerado
 
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,python

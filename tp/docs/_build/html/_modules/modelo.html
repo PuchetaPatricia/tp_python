@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelo &#8212; documentación de EstudiantesABM - 1.0.1</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/groundwork.css?v=594d7a89" />
+    <script src="../_static/documentation_options.js?v=92bc2f6d"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=efdbd0b9"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">documentación de EstudiantesABM - 1.0.1</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Código de módulo</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelo</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Código fuente para modelo</h1><div class="highlight"><pre>
+<span></span><span class="c1"># ##############################################</span>
+<span class="c1"># MODELO</span>
+<span class="c1"># ##############################################</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">ttk</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">peewee</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">base_sqlite</span> <span class="o">=</span> <span class="n">SqliteDatabase</span><span class="p">(</span><span class="s1">&#39;base_sqlite.db&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="BaseModel">
+<a class="viewcode-back" href="../modelo.html#modelo.BaseModel">[documentos]</a>
+<span class="k">class</span> <span class="nc">BaseModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">database</span> <span class="o">=</span> <span class="n">base_sqlite</span></div>
+
+
+<div class="viewcode-block" id="Estudiantes">
+<a class="viewcode-back" href="../modelo.html#modelo.Estudiantes">[documentos]</a>
+<span class="k">class</span> <span class="nc">Estudiantes</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="c1"># id = IntegerField(primary_key = True, )  # no es necesario, el ORM ya le agrega un id llamado &#39;id&#39; por defecto </span>
+    <span class="n">nombre</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">()</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">()</span>
+    <span class="n">nota</span> <span class="o">=</span> <span class="n">FloatField</span><span class="p">()</span></div>
+
+
+<span class="n">base_sqlite</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="n">base_sqlite</span><span class="o">.</span><span class="n">create_tables</span><span class="p">([</span><span class="n">Estudiantes</span><span class="p">])</span>
+
+	
+<span class="c1"># mi modelo original</span>
+
+<span class="c1"># id integer PRIMARY KEY AUTOINCREMENT,</span>
+<span class="c1"># nombre text NOT NULL,</span>
+<span class="c1"># email text NOT NULL,</span>
+<span class="c1"># nota real</span>
+
+
+
+<div class="viewcode-block" id="ManejadorBd">
+<a class="viewcode-back" href="../modelo.html#modelo.ManejadorBd">[documentos]</a>
+<span class="k">class</span> <span class="nc">ManejadorBd</span><span class="p">():</span>
+<div class="viewcode-block" id="ManejadorBd.resetear_tabla">
+<a class="viewcode-back" href="../modelo.html#modelo.ManejadorBd.resetear_tabla">[documentos]</a>
+	<span class="k">def</span> <span class="nf">resetear_tabla</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="n">base_sqlite</span><span class="o">.</span><span class="n">drop_tables</span><span class="p">([</span><span class="n">Estudiantes</span><span class="p">])</span>
+		<span class="n">base_sqlite</span><span class="o">.</span><span class="n">create_tables</span><span class="p">([</span><span class="n">Estudiantes</span><span class="p">])</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;reseteando BD y actualizando vista&#39;</span><span class="p">)</span></div>
+
+		
+<div class="viewcode-block" id="ManejadorBd.insertar_datos_default">
+<a class="viewcode-back" href="../modelo.html#modelo.ManejadorBd.insertar_datos_default">[documentos]</a>
+	<span class="k">def</span> <span class="nf">insertar_datos_default</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">insertar_datos</span><span class="p">(</span><span class="s1">&#39;Alan Martinez&#39;</span><span class="p">,</span> <span class="s1">&#39;AlanMartinez@hotmail.com&#39;</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">insertar_datos</span><span class="p">(</span><span class="s1">&#39;Pedro Villanueva&#39;</span><span class="p">,</span> <span class="s1">&#39;PVNueva66@gmail.com&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">insertar_datos</span><span class="p">(</span><span class="s1">&#39;Maria Benitez&#39;</span><span class="p">,</span> <span class="s1">&#39;Mbtez@gmail.com&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">insertar_datos</span><span class="p">(</span><span class="s1">&#39;Gustavo Romanov&#39;</span><span class="p">,</span> <span class="s1">&#39;tavo_14@outlook.com.ar&#39;</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">insertar_datos</span><span class="p">(</span><span class="s1">&#39;Josefina Cordara&#39;</span><span class="p">,</span> <span class="s1">&#39;JCor95@yahoo.com&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">insertar_datos</span><span class="p">(</span><span class="s1">&#39;Alfredo Gomez&#39;</span><span class="p">,</span> <span class="s1">&#39;GAlfredo@outlook.com.br&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span></div>
+
+		
+<div class="viewcode-block" id="ManejadorBd.traer_datos">
+<a class="viewcode-back" href="../modelo.html#modelo.ManejadorBd.traer_datos">[documentos]</a>
+	<span class="k">def</span> <span class="nf">traer_datos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="n">resultado</span> <span class="o">=</span> <span class="n">Estudiantes</span><span class="o">.</span><span class="n">select</span><span class="p">()</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;type(resultado):&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">resultado</span><span class="p">))</span> <span class="c1"># test       &lt;class &#39;peewee.ModelSelect&#39;&gt;</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;resultado&#39;</span><span class="p">,</span> <span class="n">resultado</span><span class="p">)</span> <span class="c1"># test</span>
+		<span class="k">return</span> <span class="n">resultado</span></div>
+
+	
+<div class="viewcode-block" id="ManejadorBd.insertar_datos">
+<a class="viewcode-back" href="../modelo.html#modelo.ManejadorBd.insertar_datos">[documentos]</a>
+	<span class="k">def</span> <span class="nf">insertar_datos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">nota</span><span class="p">:</span><span class="nb">float</span><span class="p">):</span>
+		<span class="n">estudiante</span> <span class="o">=</span> <span class="n">Estudiantes</span><span class="p">()</span>
+		<span class="n">estudiante</span><span class="o">.</span><span class="n">nombre</span> <span class="o">=</span> <span class="n">nombre</span>
+		<span class="n">estudiante</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">email</span>
+		<span class="n">estudiante</span><span class="o">.</span><span class="n">nota</span> <span class="o">=</span> <span class="n">nota</span>
+		<span class="n">estudiante</span><span class="o">.</span><span class="n">save</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="ManejadorBd.modificar_datos">
+<a class="viewcode-back" href="../modelo.html#modelo.ManejadorBd.modificar_datos">[documentos]</a>
+	<span class="k">def</span> <span class="nf">modificar_datos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">nombre</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">nota</span><span class="p">:</span><span class="nb">float</span><span class="p">):</span>
+		<span class="n">actualizar</span> <span class="o">=</span> <span class="n">Estudiantes</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">nombre</span><span class="o">=</span><span class="n">nombre</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span> <span class="n">nota</span><span class="o">=</span><span class="n">nota</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Estudiantes</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="nb">id</span><span class="p">)</span>
+		<span class="n">actualizar</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="ManejadorBd.eliminar_datos">
+<a class="viewcode-back" href="../modelo.html#modelo.ManejadorBd.eliminar_datos">[documentos]</a>
+	<span class="k">def</span> <span class="nf">eliminar_datos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+		<span class="c1">#registro_a_borrar = Estudiantes.get( Estudiantes.id == id ) #type: Estudiantes</span>
+		<span class="c1">#registro_a_borrar.delete_instance()</span>
+		
+		<span class="c1"># encontre este metodo </span>
+		<span class="n">Estudiantes</span><span class="o">.</span><span class="n">delete_by_id</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span></div>
+</div>
+
+
+<div class="viewcode-block" id="Modelo">
+<a class="viewcode-back" href="../modelo.html#modelo.Modelo">[documentos]</a>
+<span class="k">class</span> <span class="nc">Modelo</span><span class="p">():</span>
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">bd</span> <span class="o">=</span> <span class="n">ManejadorBd</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Modelo.actualizar_treeview">
+<a class="viewcode-back" href="../modelo.html#modelo.Modelo.actualizar_treeview">[documentos]</a>
+	<span class="k">def</span> <span class="nf">actualizar_treeview</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mi_treeview</span><span class="p">:</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&#39;&#39;&#39;Actualiza la vista&#39;&#39;&#39;</span>
+		<span class="n">hijos</span> <span class="o">=</span> <span class="n">mi_treeview</span><span class="o">.</span><span class="n">get_children</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">hijo</span> <span class="ow">in</span> <span class="n">hijos</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hijo de treeview a borrar: &#39;</span><span class="p">,</span> <span class="n">hijo</span><span class="p">)</span>
+			<span class="n">mi_treeview</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">hijo</span><span class="p">)</span>
+
+		<span class="n">resultado</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bd</span><span class="o">.</span><span class="n">traer_datos</span><span class="p">()</span>
+
+		<span class="k">for</span> <span class="n">fila</span> <span class="ow">in</span> <span class="n">resultado</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fila&#39;</span><span class="p">,</span><span class="n">fila</span><span class="p">)</span>
+			<span class="n">mi_treeview</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">fila</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">(</span><span class="n">fila</span><span class="o">.</span><span class="n">nombre</span><span class="p">,</span> <span class="n">fila</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">fila</span><span class="o">.</span><span class="n">nota</span><span class="p">))</span></div>
+
+
+
+	<span class="c1"># TODO 1: Areglar return para que devuelva el mensaje del print en una warning.</span>
+	<span class="c1"># TODO 2: Agregar filtro para &#39;nota&#39; que sea perteneciente al intervalo [0.0, 10.0] unicamente</span>
+	<span class="c1"># TODO 3: Agregar filtro para &#39;nombre&#39; similar a email con regex.</span>
+<div class="viewcode-block" id="Modelo.alta">
+<a class="viewcode-back" href="../modelo.html#modelo.Modelo.alta">[documentos]</a>
+	<span class="k">def</span> <span class="nf">alta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">nota</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">tree</span><span class="p">:</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&#39;&#39;&#39; Realiza el alta del estudiante. Devuelve True/False &#39;&#39;&#39;</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Entrando ALTA&#39;</span><span class="p">)</span>
+		<span class="k">if</span><span class="p">(</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">validar_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span> <span class="p">):</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;error en campo email: &#39;</span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="s2">&#39; no es una direccion de email valida&quot;</span><span class="p">)</span>
+			<span class="k">return</span> <span class="kc">False</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;nombre:&#39;</span><span class="p">,</span> <span class="n">nombre</span><span class="p">,</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;email:&#39;</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;nota:&#39;</span><span class="p">,</span> <span class="n">nota</span><span class="p">)</span>
+
+		<span class="bp">self</span><span class="o">.</span><span class="n">bd</span><span class="o">.</span><span class="n">insertar_datos</span><span class="p">(</span><span class="n">nombre</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">nota</span><span class="p">)</span>
+
+		<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Alta exitosa&quot;</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">actualizar_treeview</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+		<span class="k">return</span> <span class="kc">True</span></div>
+
+			
+<div class="viewcode-block" id="Modelo.validar_email">
+<a class="viewcode-back" href="../modelo.html#modelo.Modelo.validar_email">[documentos]</a>
+	<span class="k">def</span> <span class="nf">validar_email</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">		Devuelve algo analogo a TRUE si el email es una </span>
+<span class="sd">		direccion de email VALIDA y algo analogo a FALSE si no lo es</span>
+<span class="sd">		&#39;&#39;&#39;</span>
+		<span class="n">PATRON</span> <span class="o">=</span> <span class="s1">&#39;^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$&#39;</span>  <span class="c1">#regex para el email</span>
+		<span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">PATRON</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span> </div>
+
+			
+<div class="viewcode-block" id="Modelo.modificar">
+<a class="viewcode-back" href="../modelo.html#modelo.Modelo.modificar">[documentos]</a>
+	<span class="k">def</span> <span class="nf">modificar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">nota</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">tree</span><span class="p">:</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">):</span> <span class="c1"># TODO</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Entrando a MODIFICAR&#39;</span><span class="p">)</span>
+
+		<span class="n">valor_seleccionado</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">selection</span><span class="p">()</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="n">valor_seleccionado</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;NO SE SELECCIONO NADA&#39;</span><span class="p">)</span>
+			<span class="k">return</span>
+		
+		<span class="k">if</span><span class="p">(</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">validar_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span> <span class="p">):</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;error en campo email: &#39;</span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="s2">&#39; no es una direccion de email valida&quot;</span><span class="p">)</span>
+			<span class="k">return</span>	
+		
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;valor_seleccionado&#39;</span><span class="p">,</span><span class="n">valor_seleccionado</span><span class="p">)</span>   <span class="c1">#(&#39;I005&#39;,)</span>
+		<span class="n">item</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">valor_seleccionado</span><span class="p">)</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;item&#39;</span><span class="p">,</span><span class="n">item</span><span class="p">)</span>    <span class="c1"># item {&#39;text&#39;: 26, &#39;image&#39;: &#39;&#39;, &#39;values&#39;: [&#39;Alfredo Gomez&#39;, &#39;GAlfredo@s&#39;: &#39;&#39;}</span>
+
+		<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;item[&#39;text&#39;]&quot;</span><span class="p">,</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+		<span class="n">mi_id</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
+		<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Valores del item con id = </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+		<span class="n">lista_iterable</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;nombre&#39;</span><span class="p">,</span><span class="s1">&#39;email&#39;</span><span class="p">,</span><span class="s1">&#39;nota&#39;</span><span class="p">]</span>
+		<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lista_iterable</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">]):</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+		<span class="bp">self</span><span class="o">.</span><span class="n">bd</span><span class="o">.</span><span class="n">modificar_datos</span><span class="p">(</span><span class="n">mi_id</span><span class="p">,</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">nota</span><span class="p">)</span>
+
+		<span class="bp">self</span><span class="o">.</span><span class="n">actualizar_treeview</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;FIN MODIFICAR&#39;</span><span class="p">)</span></div>
+
+		
+
+<div class="viewcode-block" id="Modelo.borrar">
+<a class="viewcode-back" href="../modelo.html#modelo.Modelo.borrar">[documentos]</a>
+	<span class="k">def</span> <span class="nf">borrar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree</span><span class="p">:</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">):</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Entrando a BORRAR&#39;</span><span class="p">)</span>
+		<span class="n">valor_seleccionado</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">selection</span><span class="p">()</span> 
+		<span class="k">if</span> <span class="ow">not</span> <span class="n">valor_seleccionado</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;NO SE SELECCIONO NADA&#39;</span><span class="p">)</span>
+			<span class="k">return</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;valor_seleccionado&#39;</span><span class="p">,</span><span class="n">valor_seleccionado</span><span class="p">)</span>   <span class="c1">#(&#39;I005&#39;,)</span>
+		<span class="n">item</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">valor_seleccionado</span><span class="p">)</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;item&#39;</span><span class="p">,</span><span class="n">item</span><span class="p">)</span>    <span class="c1">#{&#39;text&#39;: 5, &#39;image&#39;: &#39;&#39;, &#39;values&#39;: [&#39;daSDasd&#39;, &#39;13.0&#39;, &#39;2.0&#39;], &#39;open&#39;: 0, &#39;tags&#39;: &#39;&#39;}</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;item[&#39;text&#39;]&quot;</span><span class="p">,</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+		<span class="n">mi_id</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
+		
+		<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Valores del item con id = </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+		<span class="n">lista_iterable</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;nombre&#39;</span><span class="p">,</span><span class="s1">&#39;email&#39;</span><span class="p">,</span><span class="s1">&#39;nota&#39;</span><span class="p">]</span>
+		<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lista_iterable</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">]):</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+		<span class="bp">self</span><span class="o">.</span><span class="n">bd</span><span class="o">.</span><span class="n">eliminar_datos</span><span class="p">(</span><span class="n">mi_id</span><span class="p">)</span>
+		<span class="n">tree</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">valor_seleccionado</span><span class="p">)</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;FIN BORRAR&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Modelo.insertar_datos_default">
+<a class="viewcode-back" href="../modelo.html#modelo.Modelo.insertar_datos_default">[documentos]</a>
+	<span class="k">def</span> <span class="nf">insertar_datos_default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree</span><span class="p">:</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">bd</span><span class="o">.</span><span class="n">insertar_datos_default</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">actualizar_treeview</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Modelo.resetear_tabla">
+<a class="viewcode-back" href="../modelo.html#modelo.Modelo.resetear_tabla">[documentos]</a>
+	<span class="k">def</span> <span class="nf">resetear_tabla</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree</span><span class="p">:</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">bd</span><span class="o">.</span><span class="n">resetear_tabla</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">actualizar_treeview</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">documentación de EstudiantesABM - 1.0.1</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Código de módulo</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelo</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, Alejandro Genolet, Alexis Romaniuk, Nicolas Dorelle, Patricia Pucheta.
+      Creado usando <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>

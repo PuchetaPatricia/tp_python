@@ -85,13 +85,13 @@ class Vista():
 		boton_modificar = Button(root, text = "Modificar", command = lambda : modificar(nombre_var.get(), email_var.get(), nota_var.get(), tree)) 
 		boton_modificar.grid(row = 7, column = 1)
 
-		boton_borrar = Button(root, text = "Borrar", command = lambda:borrar(tree)) 
+		boton_borrar = Button(root, text = "Borrar", command = lambda : borrar(tree)) 
 		boton_borrar.grid(row = 8, column = 1)
 
-		boton_reset = Button(root, text = "Poblar tabla BD", command = lambda:insertar_datos_default(tree)) 
+		boton_reset = Button(root, text = "Poblar tabla BD", command = lambda : insertar_datos_default(tree)) 
 		boton_reset.grid(row = 6, column = 3)
 
-		boton_reset = Button(root, text = "Resetear tabla BD", command = lambda:resetear_tabla(tree)) 
+		boton_reset = Button(root, text = "Resetear tabla BD", command = lambda : resetear_tabla(tree)) 
 		boton_reset.grid(row = 7, column = 3)
 
 		return tree

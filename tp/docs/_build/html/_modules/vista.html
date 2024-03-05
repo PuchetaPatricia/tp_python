@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vista &#8212; documentación de EstudiantesABM - 1.0.1</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/groundwork.css?v=594d7a89" />
+    <script src="../_static/documentation_options.js?v=92bc2f6d"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=efdbd0b9"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">documentación de EstudiantesABM - 1.0.1</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Código de módulo</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">vista</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Código fuente para vista</h1><div class="highlight"><pre>
+<span></span><span class="c1"># ##############################################</span>
+<span class="c1"># VISTA</span>
+<span class="c1"># ##############################################</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">Tk</span><span class="p">,</span> <span class="n">Label</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">Entry</span><span class="p">,</span> <span class="n">Button</span><span class="p">,</span> <span class="n">StringVar</span><span class="p">,</span> <span class="n">DoubleVar</span><span class="p">,</span> <span class="n">ttk</span>
+<span class="kn">from</span> <span class="nn">tkinter.messagebox</span> <span class="kn">import</span> <span class="n">showinfo</span><span class="p">,</span> <span class="n">showwarning</span>
+
+
+<div class="viewcode-block" id="Vista">
+<a class="viewcode-back" href="../vista.html#vista.Vista">[documentos]</a>
+<span class="k">class</span> <span class="nc">Vista</span><span class="p">():</span>
+<div class="viewcode-block" id="Vista.limpiar_campos">
+<a class="viewcode-back" href="../vista.html#vista.Vista.limpiar_campos">[documentos]</a>
+	<span class="k">def</span> <span class="nf">limpiar_campos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre</span><span class="p">:</span><span class="n">StringVar</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span><span class="n">StringVar</span><span class="p">,</span> <span class="n">nota</span><span class="p">:</span><span class="n">DoubleVar</span><span class="p">):</span>
+		<span class="n">nombre</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+		<span class="n">email</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+		<span class="n">nota</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span></div>
+
+
+	<span class="c1"># TODO 1: Agregar mensaje de razon de falla (ej, email incorrecto)</span>
+	<span class="c1"># TODO 2: Repetir esta misma funcion pero para modificar/eliminar</span>
+<div class="viewcode-block" id="Vista.alta_aux">
+<a class="viewcode-back" href="../vista.html#vista.Vista.alta_aux">[documentos]</a>
+	<span class="k">def</span> <span class="nf">alta_aux</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre</span><span class="p">:</span><span class="n">StringVar</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span><span class="n">StringVar</span><span class="p">,</span> <span class="n">nota</span><span class="p">:</span><span class="n">DoubleVar</span><span class="p">,</span> <span class="n">tree</span><span class="p">:</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">,</span> <span class="n">alta</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&#39;&#39;&#39; &quot;alta&quot; es una funcion que viene del modelo &#39;&#39;&#39;</span>
+
+		<span class="k">try</span><span class="p">:</span>
+			<span class="n">confirmacion_alta</span> <span class="o">=</span> <span class="n">alta</span><span class="p">(</span><span class="n">nombre</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">email</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">nota</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">tree</span><span class="p">)</span> <span class="c1">#type: bool</span>
+			<span class="k">if</span> <span class="n">confirmacion_alta</span><span class="p">:</span>
+				<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ALTA CORRECTA&#39;</span><span class="p">)</span>
+				<span class="n">showinfo</span><span class="p">(</span><span class="s1">&#39;Mensaje&#39;</span><span class="p">,</span><span class="s1">&#39;Alta correcta&#39;</span><span class="p">)</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">limpiar_campos</span><span class="p">(</span><span class="n">nombre</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">nota</span><span class="p">)</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ALTA FALLIDA&#39;</span><span class="p">)</span>
+				<span class="n">showwarning</span><span class="p">(</span><span class="s1">&#39;Mensaje&#39;</span><span class="p">,</span><span class="s1">&#39;Alta fallida&#39;</span><span class="p">)</span>
+		<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+			<span class="n">showwarning</span><span class="p">(</span><span class="s1">&#39;Mensaje&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Alta fallida. Error en el ingreso de datos.&#39;</span><span class="p">)</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Excepcion: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Vista.crear_treeview">
+<a class="viewcode-back" href="../vista.html#vista.Vista.crear_treeview">[documentos]</a>
+	<span class="k">def</span> <span class="nf">crear_treeview</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Tk</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">:</span>
+		<span class="c1"># --------------------------------------------------</span>
+		<span class="c1"># TREEVIEW</span>
+		<span class="c1"># --------------------------------------------------</span>
+		<span class="n">tree</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+		<span class="c1"># print(&#39;t1 imprimiendo arbol (tree):&#39;,tree.)     #.!treeview</span>
+		<span class="n">tree</span><span class="p">[</span><span class="s2">&quot;columns&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;col1&quot;</span><span class="p">,</span> <span class="s2">&quot;col2&quot;</span><span class="p">,</span> <span class="s2">&quot;col3&quot;</span><span class="p">)</span>
+		<span class="n">tree</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="s2">&quot;#0&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">minwidth</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="n">W</span><span class="p">)</span>
+		<span class="n">tree</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="s2">&quot;col1&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">minwidth</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+		<span class="n">tree</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="s2">&quot;col2&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">minwidth</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+		<span class="n">tree</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="s2">&quot;col3&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">minwidth</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+		<span class="n">tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span><span class="s2">&quot;#0&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;ID&quot;</span><span class="p">)</span>
+		<span class="n">tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span><span class="s2">&quot;col1&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Nombre&quot;</span><span class="p">)</span>
+		<span class="n">tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span><span class="s2">&quot;col2&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Email&quot;</span><span class="p">)</span>
+		<span class="n">tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span><span class="s2">&quot;col3&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Nota&quot;</span><span class="p">)</span>
+		<span class="n">tree</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">tree</span></div>
+
+
+<div class="viewcode-block" id="Vista.ventana_principal">
+<a class="viewcode-back" href="../vista.html#vista.Vista.ventana_principal">[documentos]</a>
+	<span class="k">def</span> <span class="nf">ventana_principal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span><span class="n">Tk</span><span class="p">,</span> <span class="n">alta</span><span class="p">,</span> <span class="n">modificar</span><span class="p">,</span> <span class="n">borrar</span><span class="p">,</span> <span class="n">insertar_datos_default</span><span class="p">,</span> <span class="n">resetear_tabla</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">			Genera la vista principal.</span>
+<span class="sd">			</span>
+<span class="sd">			alta, modificar, borrar, insertar_datos_default y resetear_tabla son funciones</span>
+<span class="sd">		&#39;&#39;&#39;</span>
+		<span class="n">root</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;CRUD de estudiantes&quot;</span><span class="p">)</span>
+				
+		<span class="n">titulo</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Ingrese la informacion del alumno&quot;</span><span class="p">,</span> 
+					<span class="n">bg</span> <span class="o">=</span> <span class="s2">&quot;dark green&quot;</span><span class="p">,</span> <span class="n">fg</span> <span class="o">=</span> <span class="s2">&quot;thistle1&quot;</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">60</span><span class="p">)</span>
+		<span class="n">titulo</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">column</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">columnspan</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">padx</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">pady</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sticky</span> <span class="o">=</span> <span class="n">W</span><span class="o">+</span><span class="n">E</span><span class="p">)</span>
+
+		<span class="n">estudiante</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Nombre&quot;</span><span class="p">)</span>
+		<span class="n">estudiante</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">column</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span> <span class="o">=</span> <span class="n">W</span><span class="p">)</span>
+		<span class="n">email</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Email&quot;</span><span class="p">)</span>
+		<span class="n">email</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">column</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span> <span class="o">=</span> <span class="n">W</span><span class="p">)</span>
+		<span class="n">nota</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Nota&quot;</span><span class="p">)</span>
+		<span class="n">nota</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">column</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span> <span class="o">=</span> <span class="n">W</span><span class="p">)</span>
+
+		<span class="c1"># Defino variables para tomar valores de campos de entrada</span>
+		<span class="n">nombre_var</span><span class="p">,</span> <span class="n">email_var</span><span class="p">,</span> <span class="n">nota_var</span> <span class="o">=</span> <span class="n">StringVar</span><span class="p">(),</span> <span class="n">StringVar</span><span class="p">(),</span> <span class="n">DoubleVar</span><span class="p">()</span>
+		<span class="n">ANCHO_ENTRADAS</span> <span class="o">=</span> <span class="mi">20</span>
+
+		<span class="n">entrada1</span> <span class="o">=</span> <span class="n">Entry</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">textvariable</span> <span class="o">=</span> <span class="n">nombre_var</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">ANCHO_ENTRADAS</span><span class="p">)</span> 
+		<span class="n">entrada1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">column</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+		<span class="n">entrada2</span> <span class="o">=</span> <span class="n">Entry</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">textvariable</span> <span class="o">=</span> <span class="n">email_var</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">ANCHO_ENTRADAS</span><span class="p">)</span> 
+		<span class="n">entrada2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">column</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+		<span class="n">entrada3</span> <span class="o">=</span> <span class="n">Entry</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">textvariable</span> <span class="o">=</span> <span class="n">nota_var</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">ANCHO_ENTRADAS</span><span class="p">)</span> 
+		<span class="n">entrada3</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">column</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+		<span class="n">tree</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">crear_treeview</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+
+		<span class="n">boton_alta</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Alta&quot;</span><span class="p">,</span> <span class="n">command</span> <span class="o">=</span> <span class="k">lambda</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">alta_aux</span><span class="p">(</span><span class="n">nombre_var</span><span class="p">,</span> <span class="n">email_var</span><span class="p">,</span> <span class="n">nota_var</span><span class="p">,</span> <span class="n">tree</span><span class="p">,</span> <span class="n">alta</span><span class="p">))</span> 
+		<span class="n">boton_alta</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">column</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+		<span class="n">boton_modificar</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Modificar&quot;</span><span class="p">,</span> <span class="n">command</span> <span class="o">=</span> <span class="k">lambda</span> <span class="p">:</span> <span class="n">modificar</span><span class="p">(</span><span class="n">nombre_var</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">email_var</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">nota_var</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">tree</span><span class="p">))</span> 
+		<span class="n">boton_modificar</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span> <span class="n">column</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+		<span class="n">boton_borrar</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Borrar&quot;</span><span class="p">,</span> <span class="n">command</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span><span class="n">borrar</span><span class="p">(</span><span class="n">tree</span><span class="p">))</span> 
+		<span class="n">boton_borrar</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="n">column</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+		<span class="n">boton_reset</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Poblar tabla BD&quot;</span><span class="p">,</span> <span class="n">command</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span><span class="n">insertar_datos_default</span><span class="p">(</span><span class="n">tree</span><span class="p">))</span> 
+		<span class="n">boton_reset</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">column</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+
+		<span class="n">boton_reset</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Resetear tabla BD&quot;</span><span class="p">,</span> <span class="n">command</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span><span class="n">resetear_tabla</span><span class="p">(</span><span class="n">tree</span><span class="p">))</span> 
+		<span class="n">boton_reset</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span> <span class="n">column</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+
+		<span class="k">return</span> <span class="n">tree</span></div>
+</div>
+
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">documentación de EstudiantesABM - 1.0.1</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Código de módulo</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">vista</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, Alejandro Genolet, Alexis Romaniuk, Nicolas Dorelle, Patricia Pucheta.
+      Creado usando <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>
