@@ -1,6 +1,6 @@
 '''
-vista.py:
-	Representa la interfaz del programa con el usuario
+	vista.py:
+		Representa la interfaz del programa con el usuario
 '''
 from tkinter import Tk, Label, W, E, Entry, Button, StringVar, DoubleVar, ttk
 from tkinter.messagebox import showinfo, showwarning
@@ -12,11 +12,7 @@ class Vista():
 	'''
 	def limpiar_campos(self, nombre:StringVar, email:StringVar, nota:DoubleVar):
 		'''
-		Limpia los campos de los Entry de la ventana principal.
-		:param nombre: Variable Nombre cuyo valor se limpiara/reseteara.
-		:param email: Variable Email cuyo valor se limpiara/reseteara.
-		:param nota: Variable Nota cuyo valor se limpiara/reseteara.
-		:returns: None
+			Limpia los campos de los Entry de la ventana principal.
 		'''
 		nombre.set('')
 		email.set('')
@@ -26,13 +22,8 @@ class Vista():
 	# TODO 2: Repetir esta misma funcion pero para modificar/eliminar
 	def alta_aux(self, nombre:StringVar, email:StringVar, nota:DoubleVar, tree: ttk.Treeview, alta):
 		'''
-		Se encarga de solicitar el alta de un nuevo registro al modelo, con los datos ingresados.
-		:param nombre: Nombre del registro de alta
-		:param email: Email del registro de alta
-		:param nota: Nota del registro de alta
-		:param tree: Treeview 
-  		:param tree: alta (funcion de modelo.py)
-		:returns: None
+			Se encarga de solicitar el alta de un nuevo registro al modelo, con los datos ingresados.
+			"alta" es una funcion del modelo.
 		'''
 
 		try:
@@ -50,13 +41,8 @@ class Vista():
 
 	def modificar_aux(self, nombre:StringVar, email:StringVar, nota:DoubleVar, tree: ttk.Treeview, modificar):
 		''' 
-		Se encarga de solicitar la modificacion de un registro al modelo, con los datos ingresados y el registro seleccionado del treeview.
-    	:param nombre: Nombre del registro de alta
-		:param email: Email del registro de alta
-		:param nota: Nota del registro de alta
-		:param tree: Treeview 
-		:param modificar: modificar (funcion de modelo.py)	
-		:returns: None
+			Se encarga de solicitar la modificacion de un registro al modelo, con los datos ingresados y el registro seleccionado del treeview.
+    		"modificar" es una funcion del modelo.
 		'''
 
 		try:
@@ -78,9 +64,7 @@ class Vista():
 	# --------------------------------------------------
 	def crear_treeview(self, root: Tk) -> ttk.Treeview:
 		'''
-		Crea la estructura del treeview mostrado en la ventana principal.
-		:param root: Instancia de Tk
-		:returns: Devuelve un objeto del tipo Treeview.
+			Crea la estructura del treeview mostrado en la ventana principal.
 		'''
 
 		tree = ttk.Treeview(root)
@@ -96,17 +80,10 @@ class Vista():
 		tree.grid(row=10, column=0, columnspan=4)
 		return tree
 
-	def ventana_principal(self, root:Tk, alta, modificar, borrar, insertar_datos_default, resetear_tabla):
+	def ventana_principal(self, root:Tk, alta, modificar, borrar, insertar_datos_default, resetear_tabla) -> ttk.Treeview:
 		'''
-		Genera la vista principal.
-		Insatancia el 'alta', 'modificar', 'borrar', 'insertar_datos_default' y 'resetear_tabla' del modelo.
-		:param root: root de Tk
-  		:param alta: Genera el boton alta
-		:param modificar: Genera el boton Modificar 
-		:param borrar: Genera el boton borrar 
-		:param insertar_datos_default: Genera el boton Insertar Datos Default 
-		:param resetear_tabla: Genera el boton Resetear Tabla 
-		:return: Devuelve un objeto del tipo Treeview.
+			Genera la vista principal.
+			Instancia el 'alta', 'modificar', 'borrar', 'insertar_datos_default' y 'resetear_tabla' del modelo.
 		'''
 		root.title("CRUD de estudiantes")
 				

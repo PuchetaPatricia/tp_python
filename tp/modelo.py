@@ -1,6 +1,6 @@
 '''
-modelo.py:
-	Representa el modelo logico del programa
+	modelo.py:
+		Representa el modelo logico del programa
 '''
 from tkinter import ttk
 import re
@@ -34,8 +34,7 @@ class ManejadorBd():
 	'''
 	def resetear_tabla(self):
 		'''
-		Borra la tabla y la vuelve a crear vacia.
-  		:return: None
+			Borra la tabla y la vuelve a crear vacia.
 		'''
 
 		base_sqlite.drop_tables([Estudiantes])
@@ -44,8 +43,7 @@ class ManejadorBd():
 		
 	def insertar_datos_default(self):
 		'''
-		Inserta datos dummy en la tabla estudiantes.
-  		:returns: None
+			Inserta datos dummy en la tabla estudiantes.
 		'''
 
 		self.insertar_datos('Alan Martinez', 'AlanMartinez@hotmail.com', 6.5)
@@ -57,22 +55,16 @@ class ManejadorBd():
 		
 	def traer_datos(self):
 		'''
-		Trae todos los datos de la tabla estudiantes.
-		:returns: objeto de tipo <class 'peewee.ModelSelect'>
+			Trae todos los datos de la tabla estudiantes.
+			Devuelve un objeto de tipo <class 'peewee.ModelSelect'>
 		'''
 
 		resultado = Estudiantes.select()
-		print('type(resultado):', type(resultado)) # test       <class 'peewee.ModelSelect'>
-		print('resultado', resultado) # test
 		return resultado
 	
 	def insertar_datos(self, nombre:str, email:str, nota:float):
 		'''
-		Inserta un nuevo registro en la tabla estudiantes.
-  		:param nombre: Nombre a insertar
-		:param email: Email a insertar
-		:param nota: Nota a insertar
-  		:returns: None
+			Inserta un nuevo registro en la tabla estudiantes.
 		'''
 
 		estudiante = Estudiantes()
@@ -83,12 +75,7 @@ class ManejadorBd():
 
 	def modificar_datos(self, id, nombre:str, email:str, nota:float):
 		'''
-		Modifica el registro de la tabla estudiantes, con los datos ingresados, segun el id pasado por parametro.
-		:param id: id del registro a modificar
-		:param nombre: Nombre nuevo
-		:param email: Email nuevo
-		:param nota: Nota nueva
-		:returns: None
+			Modifica el registro de la tabla estudiantes, con los datos ingresados, segun el id pasado por parametro.
 		'''
 
 		actualizar = Estudiantes.update(nombre=nombre, email=email, nota=nota).where(Estudiantes.id == id)
@@ -96,9 +83,7 @@ class ManejadorBd():
 
 	def eliminar_datos(self, id):
 		'''
-		Elimina el registro de la tabla estudiante, segun el id pasado por parametro.
-		:param id: id del registro a eliminar
-		:returns: None
+			Elimina el registro de la tabla estudiante, segun el id pasado por parametro.
 		'''
 		Estudiantes.delete_by_id(id)
 
@@ -112,10 +97,8 @@ class Modelo():
 
 	def actualizar_treeview(self, mi_treeview: ttk.Treeview):
 		'''
-		Llama al metodo "traer_datos" del manejador de base de datos y
-		actualiza el treeview de la ventana principal.
-		:param: Instancia Treeview
-  		:returns: None
+			Llama al metodo "traer_datos" del manejador de base de datos y
+			actualiza el treeview de la ventana principal.
 		'''
 
 		hijos = mi_treeview.get_children()
@@ -132,13 +115,9 @@ class Modelo():
 
 	def alta(self, nombre:str, email:str, nota:float, tree: ttk.Treeview):
 		''' 
-		Llama al metodo "insertar_datos" del manejador de base de datos para 
-		realizar el alta del estudiante. 
-  		:param nombre: Nombre a insertar
-		:param email: Email a insertar
-		:param nota: Nota a insertar
-  		:param tree: Instancia Treeview	
-		:returns: Devuelve True si se dio el alta correctamente o False si no se pudo dar de alta el registro.
+			Llama al metodo "insertar_datos" del manejador de base de datos para 
+			realizar el alta del estudiante.
+			Devuelve True si se dio el alta correctamente o False si no se pudo dar de alta el registro.
 		'''
 
 		print('Entrando ALTA')
@@ -160,9 +139,8 @@ class Modelo():
 
 	def validar_nombre(self, nombre:str):
 		''' 
-		Valida si el nombre del estudiante coincide con el patron esperado.
-		:param nombre: Nombre a validar
-  		:returns: Devuelve algo analogo a TRUE si el nombre contiene caracteres a-z y no termina ni comienza en espacios.
+			Valida si el nombre del estudiante coincide con el patron esperado.
+			Devuelve algo analogo a TRUE si el nombre contiene caracteres a-z y no termina ni comienza en espacios.
 		'''
 
 		PATRON = '^[A-Za-z]+(?:[ _-][A-Za-z]+)*$$'  #regex para el nombre del alumno
@@ -170,10 +148,9 @@ class Modelo():
 
 	def validar_email(self, email:str):
 		''' 
-		Valida si el mail del estudiante coincide con el patron esperado para un mail.
-		:param email: Email a validar
-  		:returns: Devuelve algo analogo a TRUE si el email es una 
-		direccion de email VALIDA y algo analogo a FALSE si no lo es
+			Valida si el mail del estudiante coincide con el patron esperado para un mail.
+			Devuelve algo analogo a TRUE si el email es una 
+			direccion de email VALIDA y algo analogo a FALSE si no lo es
 		'''
 
 		PATRON = '^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$'  #regex para el email
@@ -181,13 +158,9 @@ class Modelo():
 			
 	def modificar(self, nombre:str, email:str, nota:float, tree: ttk.Treeview): 
 		''' 
-		Llama al metodo "modificar_datos" del manejador de base de datos para
-		realizar la modificacion del estudiante seleccionado. 
-		:param nombre: Nombre a modificar
-		:param email: Email a modificar
-		:param nota: Nota a modificar
-  		:param tree: Instancia Treeview	
-		:returns: Devuelve True si se modifico correctamente el registro o False si no se pudo modificar el registro.
+			Llama al metodo "modificar_datos" del manejador de base de datos para
+			realizar la modificacion del estudiante seleccionado. 
+			Devuelve True si se modifico correctamente el registro o False si no se pudo modificar el registro.
 		'''
 
 		print('Entrando a MODIFICAR')
@@ -225,10 +198,8 @@ class Modelo():
 
 	def borrar(self, tree: ttk.Treeview):
 		'''
-		Llama al metodo "eliminar_datos" del manejador de base de datos para 
-		realizar el borrado del estudiante seleccionado. En caso de no seleccionar nada, se envia una alerta por pantalla.
-  		:param tree: Instancia Treeview	
-		:returns: None
+			Llama al metodo "eliminar_datos" del manejador de base de datos para 
+			realizar el borrado del estudiante seleccionado. En caso de no seleccionar nada, se envia una alerta por pantalla.
 		'''
 		
 		print('Entrando a BORRAR')
@@ -253,9 +224,7 @@ class Modelo():
 
 	def insertar_datos_default(self, tree: ttk.Treeview):
 		'''
-		Llama al metodo "insertar_datos_default" del manejador de base de datos para insertar datos dummy
-  		:param tree: Instancia Treeview	
-		:returns: None
+			Llama al metodo "insertar_datos_default" del manejador de base de datos para insertar datos dummy.
 		'''
 		
 		self.bd.insertar_datos_default()
@@ -263,9 +232,7 @@ class Modelo():
 
 	def resetear_tabla(self, tree: ttk.Treeview):
 		'''
-		Llama al metodo "resetear_tabla" del manejador de base de datos para borrar la tabla y volver a crearla vacia.
-		:param tree: Instancia Treeview	
-		:returns: None
+			Llama al metodo "resetear_tabla" del manejador de base de datos para borrar la tabla y volver a crearla vacia.
 		'''
 
 		self.bd.resetear_tabla()

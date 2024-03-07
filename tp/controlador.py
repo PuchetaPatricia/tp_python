@@ -1,7 +1,7 @@
 '''
-controlador.py:
-	Modulo controlador, el cual funciona mendiante un Modelo y una Vista
-	mediando en su interaccion.
+	controlador.py:
+		Modulo controlador, el cual funciona mendiante un Modelo y una Vista
+		mediando en su interaccion.
 '''
 
 from tkinter import Tk
@@ -17,8 +17,6 @@ class Controlador():
 		'''
 		Constructor: Toda instancia de controlador esta definido por un modelo 
 		y una vista en particular.
-		:param modelo: Instancia de Modelo
-		:param vista: Instancia de Vista
 		'''
 		self.m = modelo
 		self.v = vista
@@ -27,7 +25,6 @@ class Controlador():
 		'''
 		Crea y actualiza la ventana principal de la aplicacion e 
 		inicia la ejecucion de la aplicacion.
-		:returns: None
 		'''
 		root_tk = Tk()
 
