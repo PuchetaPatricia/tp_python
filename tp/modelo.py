@@ -14,6 +14,10 @@ class BaseModel(Model):
 
 
 class Estudiantes(BaseModel):
+	'''
+		Clase Estudiantes. La usa el ORM para generar
+		la tabla de estudiantes en la base de datos.
+	'''
     # id = IntegerField(primary_key = True, )  # no es necesario, el ORM ya le agrega un id llamado 'id' por defecto 
 	nombre = CharField()
 	email = CharField()
@@ -24,10 +28,14 @@ base_sqlite.create_tables([Estudiantes])
 
 
 class ManejadorBd():
+	'''
+		Clase ManejadorBd encargada de realizar
+		todas las operaciones sobre la base de datos
+	'''
 	def resetear_tabla(self):
 		'''
 		Borra la tabla y la vuelve a crear vacia.
-  		:return: None
+  		:returns: None
 		'''
 
 		base_sqlite.drop_tables([Estudiantes])
@@ -37,7 +45,7 @@ class ManejadorBd():
 	def insertar_datos_default(self):
 		'''
 		Inserta datos dummy en la tabla estudiantes.
-  		:return: None
+  		:returns: None
 		'''
 
 		self.insertar_datos('Alan Martinez', 'AlanMartinez@hotmail.com', 6.5)
@@ -47,11 +55,10 @@ class ManejadorBd():
 		self.insertar_datos('Josefina Cordara', 'JCor95@yahoo.com', 0)
 		self.insertar_datos('Alfredo Gomez', 'GAlfredo@outlook.com.br', 8)
 		
-	def traer_datos(self):
+	def traer_datos(self) -> ModelSelect:
 		'''
 		Trae todos los datos de la tabla estudiantes.
-		Devuelve un objeto de tipo <class 'peewee.ModelSelect'>
-		:return: None
+		:returns: objeto de tipo <class 'peewee.ModelSelect'>
 		'''
 
 		resultado = Estudiantes.select()
@@ -65,7 +72,7 @@ class ManejadorBd():
   		:param nombre: Nombre a insertar
 		:param email: Email a insertar
 		:param nota: Nota a insertar
-  		:return: None
+  		:returns: None
 		'''
 
 		estudiante = Estudiantes()
@@ -81,7 +88,7 @@ class ManejadorBd():
 		:param nombre: Nombre nuevo
 		:param email: Email nuevo
 		:param nota: Nota nueva
-		:return: None
+		:returns: None
 		'''
 
 		actualizar = Estudiantes.update(nombre=nombre, email=email, nota=nota).where(Estudiantes.id == id)
@@ -90,12 +97,16 @@ class ManejadorBd():
 	def eliminar_datos(self, id):
 		'''
 		Elimina el registro de la tabla estudiante, segun el id pasado por parametro.
-		:param id: Recibe el id del registro a eliminar
-		:return: None
+		:param id: id del registro a eliminar
+		:returns: None
 		'''
 		Estudiantes.delete_by_id(id)
 
 class Modelo():
+	'''
+		Clase correspondiente al Modelo. Utiliza un manejador de bases de datos
+		llamando al constructor de la clase ManejadorBd
+	'''
 	def __init__(self):
 		self.bd = ManejadorBd()
 
@@ -104,7 +115,7 @@ class Modelo():
 		Llama al metodo "traer_datos" del manejador de base de datos y
 		actualiza el treeview de la ventana principal.
 		:param: Instancia Treeview
-  		:return: None
+  		:returns: None
 		'''
 
 		hijos = mi_treeview.get_children()
@@ -123,11 +134,11 @@ class Modelo():
 		''' 
 		Llama al metodo "insertar_datos" del manejador de base de datos para 
 		realizar el alta del estudiante. 
-  		:param nombre: Nombre a modificar
-		:param email: Email a modificar
-		:param nota: Nota a modificar
+  		:param nombre: Nombre a insertar
+		:param email: Email a insertar
+		:param nota: Nota a insertar
   		:param tree: Instancia Treeview	
-		:return: Devuelve True si se dio el alta correctamente o False si no se pudo dar de alta el registro.
+		:returns: Devuelve True si se dio el alta correctamente o False si no se pudo dar de alta el registro.
 		'''
 
 		print('Entrando ALTA')
@@ -151,7 +162,7 @@ class Modelo():
 		''' 
 		Valida si el nombre del estudiante coincide con el patron esperado.
 		:param nombre: Nombre a validar
-  		:return: Devuelve algo analogo a TRUE si el nombre contiene caracteres a-z y no termina ni comienza en espacios.
+  		:returns: Devuelve algo analogo a TRUE si el nombre contiene caracteres a-z y no termina ni comienza en espacios.
 		'''
 
 		PATRON = '^[A-Za-z]+(?:[ _-][A-Za-z]+)*$$'  #regex para el nombre del alumno
@@ -161,7 +172,7 @@ class Modelo():
 		''' 
 		Valida si el mail del estudiante coincide con el patron esperado para un mail.
 		:param email: Email a validar
-  		:return: Devuelve algo analogo a TRUE si el email es una 
+  		:returns: Devuelve algo analogo a TRUE si el email es una 
 		direccion de email VALIDA y algo analogo a FALSE si no lo es
 		'''
 
@@ -176,7 +187,7 @@ class Modelo():
 		:param email: Email a modificar
 		:param nota: Nota a modificar
   		:param tree: Instancia Treeview	
-		:return: Devuelve True si se modifico correctamente el registro o False si no se pudo modificar el registro.
+		:returns: Devuelve True si se modifico correctamente el registro o False si no se pudo modificar el registro.
 		'''
 
 		print('Entrando a MODIFICAR')
@@ -217,7 +228,7 @@ class Modelo():
 		Llama al metodo "eliminar_datos" del manejador de base de datos para 
 		realizar el borrado del estudiante seleccionado. En caso de no seleccionar nada, se envia una alerta por pantalla.
   		:param tree: Instancia Treeview	
-		:return: None
+		:returns: None
 		'''
 		
 		print('Entrando a BORRAR')
@@ -244,7 +255,7 @@ class Modelo():
 		'''
 		Llama al metodo "insertar_datos_default" del manejador de base de datos para insertar datos dummy
   		:param tree: Instancia Treeview	
-		:return: None
+		:returns: None
 		'''
 		
 		self.bd.insertar_datos_default()
@@ -254,7 +265,7 @@ class Modelo():
 		'''
 		Llama al metodo "resetear_tabla" del manejador de base de datos para borrar la tabla y volver a crearla vacia.
 		:param tree: Instancia Treeview	
-		:return: None
+		:returns: None
 		'''
 
 		self.bd.resetear_tabla()

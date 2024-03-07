@@ -6,12 +6,16 @@ from tkinter import Tk, Label, W, E, Entry, Button, StringVar, DoubleVar, ttk
 from tkinter.messagebox import showinfo, showwarning
 
 class Vista():
+	'''
+		Clase Vista. 
+		Administra la vista con la que interactua el usuario.
+	'''
 	def limpiar_campos(self, nombre:StringVar, email:StringVar, nota:DoubleVar):
 		'''
 		Limpia los campos de los Entry de la ventana principal.
-		:param nombre: Nombre del registro a limpiar
-		:param email: Email del registro a limpiar
-		:param nota: Nota del registro a limpiar
+		:param nombre: Variable Nombre cuyo valor se limpiara/reseteara.
+		:param email: Variable Email cuyo valor se limpiara/reseteara.
+		:param nota: Variable Nota cuyo valor se limpiara/reseteara.
 		:returns: None
 		'''
 		nombre.set('')
@@ -27,7 +31,7 @@ class Vista():
 		:param email: Email del registro de alta
 		:param nota: Nota del registro de alta
 		:param tree: Treeview 
-  		:param tree: Alta
+  		:param tree: alta (funcion de modelo.py)
 		:returns: None
 		'''
 
@@ -51,7 +55,7 @@ class Vista():
 		:param email: Email del registro de alta
 		:param nota: Nota del registro de alta
 		:param tree: Treeview 
-		:param modificar: Modificar 	
+		:param modificar: modificar (funcion de modelo.py)	
 		:returns: None
 		'''
 
@@ -80,7 +84,6 @@ class Vista():
 		'''
 
 		tree = ttk.Treeview(root)
-		# print('t1 imprimiendo arbol (tree):',tree.)     #.!treeview
 		tree["columns"]=("col1", "col2", "col3")
 		tree.column("#0", width=90, minwidth=50, anchor=W)
 		tree.column("col1", width=200, minwidth=80)
