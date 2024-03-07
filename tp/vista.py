@@ -29,6 +29,23 @@ class Vista():
 			showwarning('Mensaje', f'Alta fallida. Error en el ingreso de datos.')
 			print(f'Excepcion: {e}')
 
+	def modificar_aux(self, nombre:StringVar, email:StringVar, nota:DoubleVar, tree: ttk.Treeview, modificar):
+		''' "modificar" es una funcion que viene del modelo '''
+
+		try:
+			confirmacion_modificar = modificar(nombre.get(), email.get(), nota.get(), tree) #type: bool
+			if confirmacion_modificar:
+				print('MODIFICACION CORRECTA')
+				showinfo('Mensaje','Modificacion correcta')
+				self.limpiar_campos(nombre, email, nota)
+			else:
+				print('MODIFICACION FALLIDA')
+				showwarning('Mensaje','Modificacion fallida')
+		except Exception as e:
+			showwarning('Mensaje', f'Modificacion fallida. Error en el ingreso de datos.')
+			print(f'Excepcion: {e}')
+
+
 	def crear_treeview(self, root: Tk) -> ttk.Treeview:
 		# --------------------------------------------------
 		# TREEVIEW
@@ -50,8 +67,8 @@ class Vista():
 	def ventana_principal(self, root:Tk, alta, modificar, borrar, insertar_datos_default, resetear_tabla):
 		'''
 			Genera la vista principal.
-			
-			alta, modificar, borrar, insertar_datos_default y resetear_tabla son funciones
+			'alta', 'modificar', 'borrar', 'insertar_datos_default' y 'resetear_tabla'
+			son funciones del modelo.
 		'''
 		root.title("CRUD de estudiantes")
 				
@@ -82,7 +99,7 @@ class Vista():
 		boton_alta = Button(root, text = "Alta", command = lambda : self.alta_aux(nombre_var, email_var, nota_var, tree, alta)) 
 		boton_alta.grid(row = 6, column = 1)
 
-		boton_modificar = Button(root, text = "Modificar", command = lambda : modificar(nombre_var.get(), email_var.get(), nota_var.get(), tree)) 
+		boton_modificar = Button(root, text = "Modificar", command = lambda : self.modificar_aux(nombre_var, email_var, nota_var, tree, modificar))
 		boton_modificar.grid(row = 7, column = 1)
 
 		boton_borrar = Button(root, text = "Borrar", command = lambda : borrar(tree)) 
