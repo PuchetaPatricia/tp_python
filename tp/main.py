@@ -1,4 +1,5 @@
 ''' 
+main.py:
 	Programa "principal". 
 	Instancia al controlador, el modelo y la vista.
 '''

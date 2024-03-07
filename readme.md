@@ -25,5 +25,5 @@ Se encuentra disponible documentación adicional en formato HTML para su consult
 ## Colaboradores :blush:
     Romaniuk, Alexis.
     Pucheta, Patricia.
-    Schwegler, Alejandro.
+    Genolet, Alejandro.
     Dorelle, Nicolás.
