@@ -15,7 +15,7 @@ Se recomiendan instalar las siguientes librerias:
 
 El proceso de uso del CRUD es sencillo. En el primer campo, se debe ingresar el nombre completo del alumno; en el segundo, su dirección de correo electrónico (se admiten solo textos varchar con el formato de correo electrónico estándar, es decir, una cadena de texto seguida de '@', seguida de otra cadena de texto, y finalizada con '.com'); y en el tercero, la calificación del alumno. Al dar de alta la información, se visualizará como una tabla en la parte inferior del tablero, con una columna adicional de ID que permite identificar cada registro.
 
-Por otro lado, tenemos las opciones de 'Borrar' y 'Modificar'. Para eliminar un registro, basta con seleccionarlo y presionar 'Borrar'. Para modificarlo, es necesario seleccionarlo, ingresar los nuevos valores en los campos de 'nombre', 'correo electrónico' y 'calificación', y luego presionar 'Modificar'.
+Tambien tenemos las opciones de 'Borrar' y 'Modificar'. Para eliminar un registro, basta con seleccionarlo y presionar 'Borrar'. Para modificarlo, es necesario seleccionarlo, ingresar los nuevos valores en los campos de 'nombre', 'correo electrónico' y 'calificación', y luego presionar 'Modificar'.
 
 Por otro lado, el botón de "Resetear tabla", como su nombre lo indica, borra todos los datos cargados. En cambio, el botón "Probar tabla" añade información con nombres, correos electrónicos y calificaciones a modo de ejemplo para completar la base de datos y permitir pruebas rápidas del funcionamiento del sistema.
 ## Documentacion adicional :file_folder:
