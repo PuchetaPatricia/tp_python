@@ -20,7 +20,7 @@ Por otro lado, tenemos las opciones de 'Borrar' y 'Modificar'. Para eliminar un 
 Por otro lado, el botón de "Resetear tabla", como su nombre lo indica, borra todos los datos cargados. En cambio, el botón "Probar tabla" añade información con nombres, correos electrónicos y calificaciones a modo de ejemplo para completar la base de datos y permitir pruebas rápidas del funcionamiento del sistema.
 ## Documentacion adicional :file_folder:
 Se encuentra disponible documentación adicional en formato HTML para su consulta en:
-[index.html](tp\docs\_build\html\index.html)
+[index.html](tp/docs/_build/html/index.html)
 
 ## Colaboradores :blush:
     Romaniuk, Alexis.
