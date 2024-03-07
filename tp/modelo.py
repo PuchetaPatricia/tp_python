@@ -88,13 +88,17 @@ class Modelo():
 
 	# TODO 1: Areglar return para que devuelva el mensaje del print en una warning.
 	# TODO 2: Agregar filtro para 'nota' que sea perteneciente al intervalo [0.0, 10.0] unicamente
-	# TODO 3: Agregar filtro para 'nombre' similar a email con regex.
 	def alta(self, nombre:str, email:str, nota:float, tree: ttk.Treeview):
 		''' Realiza el alta del estudiante. Devuelve True/False '''
 		print('Entrando ALTA')
 		if( not self.validar_email(email) ):
 			print(f"error en campo email: '{email}' no es una direccion de email valida")
 			return False
+		
+		if( not self.validar_nombre(nombre) ):
+			print(f"error en campo nombre: '{nombre}' no es un nombre de estudiante valido.")
+			return False
+		
 		print('nombre:', nombre, ',', 'email:', email, ',', 'nota:', nota)
 
 		self.bd.insertar_datos(nombre, email, nota)
@@ -102,7 +106,14 @@ class Modelo():
 		print("Alta exitosa")
 		self.actualizar_treeview(tree)
 		return True
-			
+
+	def validar_nombre(self, nombre:str):
+		''' 
+		Devuelve algo analogo a TRUE si el nombre contiene caracteres a-z y no termina ni comienza en espacios.
+		'''
+		PATRON = '^[A-Za-z]+(?:[ _-][A-Za-z]+)*$$'  #regex para el nombre del alumno
+		return re.match(PATRON, nombre) 
+
 	def validar_email(self, email:str):
 		''' 
 		Devuelve algo analogo a TRUE si el email es una 
@@ -111,17 +122,22 @@ class Modelo():
 		PATRON = '^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$'  #regex para el email
 		return re.match(PATRON, email) 
 			
-	def modificar(self, nombre:str, email:str, nota:float, tree: ttk.Treeview): # TODO
+	def modificar(self, nombre:str, email:str, nota:float, tree: ttk.Treeview): 
+		''' Realiza la modificacion del estudiante. Devuelve True/False '''
 		print('Entrando a MODIFICAR')
 
 		valor_seleccionado = tree.selection()
 		if not valor_seleccionado:
 			print('NO SE SELECCIONO NADA')
-			return
+			return False
 		
 		if( not self.validar_email(email) ):
 			print(f"error en campo email: '{email}' no es una direccion de email valida")
-			return	
+			return False
+		
+		if( not self.validar_nombre(nombre) ):
+			print(f"error en campo nombre: '{nombre}' no es un nombre de estudiante valido.")
+			return False
 		
 		print('valor_seleccionado',valor_seleccionado)   #('I005',)
 		item = tree.item(valor_seleccionado)
@@ -137,7 +153,8 @@ class Modelo():
 		self.bd.modificar_datos(mi_id, nombre, email, nota)
 
 		self.actualizar_treeview(tree)
-		print('FIN MODIFICAR')
+		print('Modificacion Exitosa')
+		return True
 		
 
 	def borrar(self, tree: ttk.Treeview):
