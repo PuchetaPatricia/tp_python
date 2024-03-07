@@ -1,7 +1,7 @@
-# Trabajo Practico Final :tw-1f4bb:
+# Trabajo Practico Final :computer:
 Este trabajo consiste en el desarrollo de un sistema de gestión de base de datos para alumnos de una institución educativa, que permite realizar operaciones de Crear, Leer, Actualizar y Eliminar (CRUD) información sobre los estudiantes. El sistema presenta una interfaz gráfica intuitiva que permite a los profesores ingresar de manera rápida y sencilla la información básica de los alumnos y registrar sus calificaciones.
 
-## Instrucciones de Uso :tw-1f4c4:
+## Instrucciones de Uso :page_with_curl:
 #### Instalación:
 Se recomienda utilizar la version de **Python 3.11.7**
 #### Librerias Python:
@@ -18,14 +18,12 @@ El proceso de uso del CRUD es sencillo. En el primer campo, se debe ingresar el 
 Por otro lado, tenemos las opciones de 'Borrar' y 'Modificar'. Para eliminar un registro, basta con seleccionarlo y presionar 'Borrar'. Para modificarlo, es necesario seleccionarlo, ingresar los nuevos valores en los campos de 'nombre', 'correo electrónico' y 'calificación', y luego presionar 'Modificar'.
 
 Por otro lado, el botón de "Resetear tabla", como su nombre lo indica, borra todos los datos cargados. En cambio, el botón "Probar tabla" añade información con nombres, correos electrónicos y calificaciones a modo de ejemplo para completar la base de datos y permitir pruebas rápidas del funcionamiento del sistema.
-## Documentacion adicional :tw-1f4c2:
+## Documentacion adicional :file_folder:
 Se encuentra disponible documentación adicional en formato HTML para su consulta en:
-[index.html](\tp\docs\_build\html\index.html)
+[index.html](tp\docs\_build\html\index.html)
 
-## Colaboradores :tw-1f600:
-Romaniuk, Alexis
-Pucheta, Patricia
-Schwegler, Alejandro
-Dorelle, Nicolás
-
-### END
+## Colaboradores :blush:
+    Romaniuk, Alexis.
+    Pucheta, Patricia.
+    Schwegler, Alejandro.
+    Dorelle, Nicolás.
