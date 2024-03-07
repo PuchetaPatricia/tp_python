@@ -108,51 +108,38 @@ todas las operaciones sobre la base de datos</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelo.ManejadorBd.eliminar_datos">
 <span class="sig-name descname"><span class="pre">eliminar_datos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#ManejadorBd.eliminar_datos"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.ManejadorBd.eliminar_datos" title="Link to this definition">¶</a></dt>
-<dd><p>Elimina el registro de la tabla estudiante, segun el id pasado por parametro.
-:param id: id del registro a eliminar
-:returns: None</p>
+<dd><p>Elimina el registro de la tabla estudiante, segun el id pasado por parametro.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modelo.ManejadorBd.insertar_datos">
 <span class="sig-name descname"><span class="pre">insertar_datos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nombre</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nota</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#ManejadorBd.insertar_datos"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.ManejadorBd.insertar_datos" title="Link to this definition">¶</a></dt>
-<dd><p>Inserta un nuevo registro en la tabla estudiantes.
-:param nombre: Nombre a insertar
-:param email: Email a insertar
-:param nota: Nota a insertar
-:returns: None</p>
+<dd><p>Inserta un nuevo registro en la tabla estudiantes.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modelo.ManejadorBd.insertar_datos_default">
 <span class="sig-name descname"><span class="pre">insertar_datos_default</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#ManejadorBd.insertar_datos_default"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.ManejadorBd.insertar_datos_default" title="Link to this definition">¶</a></dt>
-<dd><p>Inserta datos dummy en la tabla estudiantes.
-:returns: None</p>
+<dd><p>Inserta datos dummy en la tabla estudiantes.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modelo.ManejadorBd.modificar_datos">
 <span class="sig-name descname"><span class="pre">modificar_datos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nombre</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nota</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#ManejadorBd.modificar_datos"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.ManejadorBd.modificar_datos" title="Link to this definition">¶</a></dt>
-<dd><p>Modifica el registro de la tabla estudiantes, con los datos ingresados, segun el id pasado por parametro.
-:param id: id del registro a modificar
-:param nombre: Nombre nuevo
-:param email: Email nuevo
-:param nota: Nota nueva
-:returns: None</p>
+<dd><p>Modifica el registro de la tabla estudiantes, con los datos ingresados, segun el id pasado por parametro.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modelo.ManejadorBd.resetear_tabla">
 <span class="sig-name descname"><span class="pre">resetear_tabla</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#ManejadorBd.resetear_tabla"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.ManejadorBd.resetear_tabla" title="Link to this definition">¶</a></dt>
-<dd><p>Borra la tabla y la vuelve a crear vacia.
-:return: None</p>
+<dd><p>Borra la tabla y la vuelve a crear vacia.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modelo.ManejadorBd.traer_datos">
 <span class="sig-name descname"><span class="pre">traer_datos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#ManejadorBd.traer_datos"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.ManejadorBd.traer_datos" title="Link to this definition">¶</a></dt>
 <dd><p>Trae todos los datos de la tabla estudiantes.
-:returns: objeto de tipo &lt;class “peewee.ModelSelect”&gt;</p>
+Devuelve un objeto de tipo &lt;class “peewee.ModelSelect”&gt;</p>
 </dd></dl>
 
 </dd></dl>
@@ -167,38 +154,28 @@ llamando al constructor de la clase ManejadorBd</p>
 <dt class="sig sig-object py" id="modelo.Modelo.actualizar_treeview">
 <span class="sig-name descname"><span class="pre">actualizar_treeview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mi_treeview</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Treeview</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Modelo.actualizar_treeview"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Modelo.actualizar_treeview" title="Link to this definition">¶</a></dt>
 <dd><p>Llama al metodo «traer_datos» del manejador de base de datos y
-actualiza el treeview de la ventana principal.
-:param: Instancia Treeview
-:returns: None</p>
+actualiza el treeview de la ventana principal.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modelo.Modelo.alta">
 <span class="sig-name descname"><span class="pre">alta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nombre</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nota</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Treeview</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Modelo.alta"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Modelo.alta" title="Link to this definition">¶</a></dt>
 <dd><p>Llama al metodo «insertar_datos» del manejador de base de datos para 
-realizar el alta del estudiante. 
-:param nombre: Nombre a insertar
-:param email: Email a insertar
-:param nota: Nota a insertar
-:param tree: Instancia Treeview 
-:returns: Devuelve True si se dio el alta correctamente o False si no se pudo dar de alta el registro.</p>
+realizar el alta del estudiante.
+Devuelve True si se dio el alta correctamente o False si no se pudo dar de alta el registro.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modelo.Modelo.borrar">
 <span class="sig-name descname"><span class="pre">borrar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tree</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Treeview</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Modelo.borrar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Modelo.borrar" title="Link to this definition">¶</a></dt>
 <dd><p>Llama al metodo «eliminar_datos» del manejador de base de datos para 
-realizar el borrado del estudiante seleccionado. En caso de no seleccionar nada, se envia una alerta por pantalla.
-:param tree: Instancia Treeview 
-:returns: None</p>
+realizar el borrado del estudiante seleccionado. En caso de no seleccionar nada, se envia una alerta por pantalla.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modelo.Modelo.insertar_datos_default">
 <span class="sig-name descname"><span class="pre">insertar_datos_default</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tree</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Treeview</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Modelo.insertar_datos_default"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Modelo.insertar_datos_default" title="Link to this definition">¶</a></dt>
-<dd><p>Llama al metodo «insertar_datos_default» del manejador de base de datos para insertar datos dummy
-:param tree: Instancia Treeview 
-:returns: None</p>
+<dd><p>Llama al metodo «insertar_datos_default» del manejador de base de datos para insertar datos dummy.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -206,27 +183,20 @@ realizar el borrado del estudiante seleccionado. En caso de no seleccionar nada,
 <span class="sig-name descname"><span class="pre">modificar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nombre</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nota</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Treeview</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Modelo.modificar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Modelo.modificar" title="Link to this definition">¶</a></dt>
 <dd><p>Llama al metodo «modificar_datos» del manejador de base de datos para
 realizar la modificacion del estudiante seleccionado. 
-:param nombre: Nombre a modificar
-:param email: Email a modificar
-:param nota: Nota a modificar
-:param tree: Instancia Treeview 
-:returns: Devuelve True si se modifico correctamente el registro o False si no se pudo modificar el registro.</p>
+Devuelve True si se modifico correctamente el registro o False si no se pudo modificar el registro.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modelo.Modelo.resetear_tabla">
 <span class="sig-name descname"><span class="pre">resetear_tabla</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tree</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Treeview</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Modelo.resetear_tabla"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Modelo.resetear_tabla" title="Link to this definition">¶</a></dt>
-<dd><p>Llama al metodo «resetear_tabla» del manejador de base de datos para borrar la tabla y volver a crearla vacia.
-:param tree: Instancia Treeview 
-:returns: None</p>
+<dd><p>Llama al metodo «resetear_tabla» del manejador de base de datos para borrar la tabla y volver a crearla vacia.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modelo.Modelo.validar_email">
 <span class="sig-name descname"><span class="pre">validar_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Modelo.validar_email"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Modelo.validar_email" title="Link to this definition">¶</a></dt>
 <dd><p>Valida si el mail del estudiante coincide con el patron esperado para un mail.
-:param email: Email a validar
-:returns: Devuelve algo analogo a TRUE si el email es una 
+Devuelve algo analogo a TRUE si el email es una 
 direccion de email VALIDA y algo analogo a FALSE si no lo es</p>
 </dd></dl>
 
@@ -234,8 +204,7 @@ direccion de email VALIDA y algo analogo a FALSE si no lo es</p>
 <dt class="sig sig-object py" id="modelo.Modelo.validar_nombre">
 <span class="sig-name descname"><span class="pre">validar_nombre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nombre</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Modelo.validar_nombre"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Modelo.validar_nombre" title="Link to this definition">¶</a></dt>
 <dd><p>Valida si el nombre del estudiante coincide con el patron esperado.
-:param nombre: Nombre a validar
-:returns: Devuelve algo analogo a TRUE si el nombre contiene caracteres a-z y no termina ni comienza en espacios.</p>
+Devuelve algo analogo a TRUE si el nombre contiene caracteres a-z y no termina ni comienza en espacios.</p>
 </dd></dl>
 
 </dd></dl>

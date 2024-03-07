@@ -40,9 +40,9 @@ class Vista():
 			print(f'Excepcion: {e}')
 
 	def modificar_aux(self, nombre:StringVar, email:StringVar, nota:DoubleVar, tree: ttk.Treeview, modificar):
-		''' 
+		'''
 			Se encarga de solicitar la modificacion de un registro al modelo, con los datos ingresados y el registro seleccionado del treeview.
-    		"modificar" es una funcion del modelo.
+			"modificar" es una funcion del modelo.
 		'''
 
 		try:
@@ -83,7 +83,7 @@ class Vista():
 	def ventana_principal(self, root:Tk, alta, modificar, borrar, insertar_datos_default, resetear_tabla) -> ttk.Treeview:
 		'''
 			Genera la vista principal.
-			Instancia el 'alta', 'modificar', 'borrar', 'insertar_datos_default' y 'resetear_tabla' del modelo.
+			Utiliza las funciones 'alta', 'modificar', 'borrar', 'insertar_datos_default' y 'resetear_tabla' del modelo.
 		'''
 		root.title("CRUD de estudiantes")
 				

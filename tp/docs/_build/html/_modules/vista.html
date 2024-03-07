@@ -36,8 +36,8 @@
             
   <h1>Código fuente para vista</h1><div class="highlight"><pre>
 <span></span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">vista.py:</span>
-<span class="sd">	Representa la interfaz del programa con el usuario</span>
+<span class="sd">	vista.py:</span>
+<span class="sd">		Representa la interfaz del programa con el usuario</span>
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">Tk</span><span class="p">,</span> <span class="n">Label</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">Entry</span><span class="p">,</span> <span class="n">Button</span><span class="p">,</span> <span class="n">StringVar</span><span class="p">,</span> <span class="n">DoubleVar</span><span class="p">,</span> <span class="n">ttk</span>
 <span class="kn">from</span> <span class="nn">tkinter.messagebox</span> <span class="kn">import</span> <span class="n">showinfo</span><span class="p">,</span> <span class="n">showwarning</span>
@@ -53,11 +53,7 @@
 <a class="viewcode-back" href="../vista.html#vista.Vista.limpiar_campos">[documentos]</a>
 	<span class="k">def</span> <span class="nf">limpiar_campos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre</span><span class="p">:</span><span class="n">StringVar</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span><span class="n">StringVar</span><span class="p">,</span> <span class="n">nota</span><span class="p">:</span><span class="n">DoubleVar</span><span class="p">):</span>
 <span class="w">		</span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">		Limpia los campos de los Entry de la ventana principal.</span>
-<span class="sd">		:param nombre: Variable Nombre cuyo valor se limpiara/reseteara.</span>
-<span class="sd">		:param email: Variable Email cuyo valor se limpiara/reseteara.</span>
-<span class="sd">		:param nota: Variable Nota cuyo valor se limpiara/reseteara.</span>
-<span class="sd">		:returns: None</span>
+<span class="sd">			Limpia los campos de los Entry de la ventana principal.</span>
 <span class="sd">		&#39;&#39;&#39;</span>
 		<span class="n">nombre</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 		<span class="n">email</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
@@ -70,13 +66,8 @@
 <a class="viewcode-back" href="../vista.html#vista.Vista.alta_aux">[documentos]</a>
 	<span class="k">def</span> <span class="nf">alta_aux</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre</span><span class="p">:</span><span class="n">StringVar</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span><span class="n">StringVar</span><span class="p">,</span> <span class="n">nota</span><span class="p">:</span><span class="n">DoubleVar</span><span class="p">,</span> <span class="n">tree</span><span class="p">:</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">,</span> <span class="n">alta</span><span class="p">):</span>
 <span class="w">		</span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">		Se encarga de solicitar el alta de un nuevo registro al modelo, con los datos ingresados.</span>
-<span class="sd">		:param nombre: Nombre del registro de alta</span>
-<span class="sd">		:param email: Email del registro de alta</span>
-<span class="sd">		:param nota: Nota del registro de alta</span>
-<span class="sd">		:param tree: Treeview </span>
-<span class="sd">  		:param tree: alta (funcion de modelo.py)</span>
-<span class="sd">		:returns: None</span>
+<span class="sd">			Se encarga de solicitar el alta de un nuevo registro al modelo, con los datos ingresados.</span>
+<span class="sd">			&quot;alta&quot; es una funcion del modelo.</span>
 <span class="sd">		&#39;&#39;&#39;</span>
 
 		<span class="k">try</span><span class="p">:</span>
@@ -96,14 +87,9 @@
 <div class="viewcode-block" id="Vista.modificar_aux">
 <a class="viewcode-back" href="../vista.html#vista.Vista.modificar_aux">[documentos]</a>
 	<span class="k">def</span> <span class="nf">modificar_aux</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre</span><span class="p">:</span><span class="n">StringVar</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span><span class="n">StringVar</span><span class="p">,</span> <span class="n">nota</span><span class="p">:</span><span class="n">DoubleVar</span><span class="p">,</span> <span class="n">tree</span><span class="p">:</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">,</span> <span class="n">modificar</span><span class="p">):</span>
-<span class="w">		</span><span class="sd">&#39;&#39;&#39; </span>
-<span class="sd">		Se encarga de solicitar la modificacion de un registro al modelo, con los datos ingresados y el registro seleccionado del treeview.</span>
-<span class="sd">    	:param nombre: Nombre del registro de alta</span>
-<span class="sd">		:param email: Email del registro de alta</span>
-<span class="sd">		:param nota: Nota del registro de alta</span>
-<span class="sd">		:param tree: Treeview </span>
-<span class="sd">		:param modificar: modificar (funcion de modelo.py)	</span>
-<span class="sd">		:returns: None</span>
+<span class="w">		</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">			Se encarga de solicitar la modificacion de un registro al modelo, con los datos ingresados y el registro seleccionado del treeview.</span>
+<span class="sd">			&quot;modificar&quot; es una funcion del modelo.</span>
 <span class="sd">		&#39;&#39;&#39;</span>
 
 		<span class="k">try</span><span class="p">:</span>
@@ -128,9 +114,7 @@
 <a class="viewcode-back" href="../vista.html#vista.Vista.crear_treeview">[documentos]</a>
 	<span class="k">def</span> <span class="nf">crear_treeview</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Tk</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">:</span>
 <span class="w">		</span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">		Crea la estructura del treeview mostrado en la ventana principal.</span>
-<span class="sd">		:param root: Instancia de Tk</span>
-<span class="sd">		:returns: Devuelve un objeto del tipo Treeview.</span>
+<span class="sd">			Crea la estructura del treeview mostrado en la ventana principal.</span>
 <span class="sd">		&#39;&#39;&#39;</span>
 
 		<span class="n">tree</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
@@ -149,17 +133,10 @@
 
 <div class="viewcode-block" id="Vista.ventana_principal">
 <a class="viewcode-back" href="../vista.html#vista.Vista.ventana_principal">[documentos]</a>
-	<span class="k">def</span> <span class="nf">ventana_principal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span><span class="n">Tk</span><span class="p">,</span> <span class="n">alta</span><span class="p">,</span> <span class="n">modificar</span><span class="p">,</span> <span class="n">borrar</span><span class="p">,</span> <span class="n">insertar_datos_default</span><span class="p">,</span> <span class="n">resetear_tabla</span><span class="p">):</span>
+	<span class="k">def</span> <span class="nf">ventana_principal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span><span class="n">Tk</span><span class="p">,</span> <span class="n">alta</span><span class="p">,</span> <span class="n">modificar</span><span class="p">,</span> <span class="n">borrar</span><span class="p">,</span> <span class="n">insertar_datos_default</span><span class="p">,</span> <span class="n">resetear_tabla</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">:</span>
 <span class="w">		</span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">		Genera la vista principal.</span>
-<span class="sd">		Insatancia el &#39;alta&#39;, &#39;modificar&#39;, &#39;borrar&#39;, &#39;insertar_datos_default&#39; y &#39;resetear_tabla&#39; del modelo.</span>
-<span class="sd">		:param root: root de Tk</span>
-<span class="sd">  		:param alta: Genera el boton alta</span>
-<span class="sd">		:param modificar: Genera el boton Modificar </span>
-<span class="sd">		:param borrar: Genera el boton borrar </span>
-<span class="sd">		:param insertar_datos_default: Genera el boton Insertar Datos Default </span>
-<span class="sd">		:param resetear_tabla: Genera el boton Resetear Tabla </span>
-<span class="sd">		:return: Devuelve un objeto del tipo Treeview.</span>
+<span class="sd">			Genera la vista principal.</span>
+<span class="sd">			Utiliza las funciones &#39;alta&#39;, &#39;modificar&#39;, &#39;borrar&#39;, &#39;insertar_datos_default&#39; y &#39;resetear_tabla&#39; del modelo.</span>
 <span class="sd">		&#39;&#39;&#39;</span>
 		<span class="n">root</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;CRUD de estudiantes&quot;</span><span class="p">)</span>
 				
