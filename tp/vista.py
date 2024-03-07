@@ -7,6 +7,9 @@ from tkinter.messagebox import showinfo, showwarning
 
 class Vista():
 	def limpiar_campos(self, nombre:StringVar, email:StringVar, nota:DoubleVar):
+		'''
+			Limpia los campos de los Entry de la ventana principal.
+		'''
 		nombre.set('')
 		email.set('')
 		nota.set(0.0)
@@ -14,7 +17,9 @@ class Vista():
 	# TODO 1: Agregar mensaje de razon de falla (ej, email incorrecto)
 	# TODO 2: Repetir esta misma funcion pero para modificar/eliminar
 	def alta_aux(self, nombre:StringVar, email:StringVar, nota:DoubleVar, tree: ttk.Treeview, alta):
-		''' "alta" es una funcion que viene del modelo '''
+		'''
+			Se encarga de solicitar el alta de un nuevo registro al modelo, con los datos ingresados.
+		'''
 
 		try:
 			confirmacion_alta = alta(nombre.get(), email.get(), nota.get(), tree) #type: bool
@@ -30,7 +35,9 @@ class Vista():
 			print(f'Excepcion: {e}')
 
 	def modificar_aux(self, nombre:StringVar, email:StringVar, nota:DoubleVar, tree: ttk.Treeview, modificar):
-		''' "modificar" es una funcion que viene del modelo '''
+		''' 
+			Se encarga de solicitar la modificacion de un registro al modelo, con los datos ingresados y el registro seleccionado del treeview.
+		'''
 
 		try:
 			confirmacion_modificar = modificar(nombre.get(), email.get(), nota.get(), tree) #type: bool
@@ -46,10 +53,15 @@ class Vista():
 			print(f'Excepcion: {e}')
 
 
+	# --------------------------------------------------
+	# TREEVIEW
+	# --------------------------------------------------
 	def crear_treeview(self, root: Tk) -> ttk.Treeview:
-		# --------------------------------------------------
-		# TREEVIEW
-		# --------------------------------------------------
+		'''
+			Crea la estructura del treeview mostrado en la ventana principal.
+			Devuelve un objeto del tipo Treeview.
+		'''
+
 		tree = ttk.Treeview(root)
 		# print('t1 imprimiendo arbol (tree):',tree.)     #.!treeview
 		tree["columns"]=("col1", "col2", "col3")
@@ -67,8 +79,8 @@ class Vista():
 	def ventana_principal(self, root:Tk, alta, modificar, borrar, insertar_datos_default, resetear_tabla):
 		'''
 			Genera la vista principal.
-			'alta', 'modificar', 'borrar', 'insertar_datos_default' y 'resetear_tabla'
-			son funciones del modelo.
+			Insatancia el 'alta', 'modificar', 'borrar', 'insertar_datos_default' y 'resetear_tabla' del modelo.
+			Devuelve un objeto del tipo Treeview.
 		'''
 		root.title("CRUD de estudiantes")
 				
@@ -96,18 +108,23 @@ class Vista():
 
 		tree = self.crear_treeview(root)
 
+		# Alta
 		boton_alta = Button(root, text = "Alta", command = lambda : self.alta_aux(nombre_var, email_var, nota_var, tree, alta)) 
 		boton_alta.grid(row = 6, column = 1)
 
+		# Modificacion
 		boton_modificar = Button(root, text = "Modificar", command = lambda : self.modificar_aux(nombre_var, email_var, nota_var, tree, modificar))
 		boton_modificar.grid(row = 7, column = 1)
 
+		# Borrado
 		boton_borrar = Button(root, text = "Borrar", command = lambda : borrar(tree)) 
 		boton_borrar.grid(row = 8, column = 1)
 
+		# Insercion de datos dummy
 		boton_reset = Button(root, text = "Poblar tabla BD", command = lambda : insertar_datos_default(tree)) 
 		boton_reset.grid(row = 6, column = 3)
 
+		# Limpieza de la tabla, borrado de todos los datos
 		boton_reset = Button(root, text = "Resetear tabla BD", command = lambda : resetear_tabla(tree)) 
 		boton_reset.grid(row = 7, column = 3)
 
