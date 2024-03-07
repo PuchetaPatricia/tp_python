@@ -40,31 +40,47 @@
             
   <section id="module-vista">
 <span id="vista-module"></span><h1>vista module<a class="headerlink" href="#module-vista" title="Link to this heading">¶</a></h1>
+<dl class="simple">
+<dt>vista.py:</dt><dd><p>Representa la interfaz del programa con el usuario</p>
+</dd>
+</dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="vista.Vista">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vista.</span></span><span class="sig-name descname"><span class="pre">Vista</span></span><a class="reference internal" href="_modules/vista.html#Vista"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#vista.Vista" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase Vista. 
+Administra la vista con la que interactua el usuario.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="vista.Vista.alta_aux">
 <span class="sig-name descname"><span class="pre">alta_aux</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nombre</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">StringVar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">StringVar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nota</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DoubleVar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Treeview</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vista.html#Vista.alta_aux"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#vista.Vista.alta_aux" title="Link to this definition">¶</a></dt>
-<dd><p>«alta» es una funcion que viene del modelo</p>
+<dd><p>Se encarga de solicitar el alta de un nuevo registro al modelo, con los datos ingresados.
+«alta» es una funcion del modelo.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vista.Vista.crear_treeview">
 <span class="sig-name descname"><span class="pre">crear_treeview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tk</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Treeview</span></span></span><a class="reference internal" href="_modules/vista.html#Vista.crear_treeview"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#vista.Vista.crear_treeview" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Crea la estructura del treeview mostrado en la ventana principal.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vista.Vista.limpiar_campos">
 <span class="sig-name descname"><span class="pre">limpiar_campos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nombre</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">StringVar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">StringVar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nota</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DoubleVar</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vista.html#Vista.limpiar_campos"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#vista.Vista.limpiar_campos" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Limpia los campos de los Entry de la ventana principal.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vista.Vista.modificar_aux">
+<span class="sig-name descname"><span class="pre">modificar_aux</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nombre</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">StringVar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">StringVar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nota</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DoubleVar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Treeview</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modificar</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vista.html#Vista.modificar_aux"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#vista.Vista.modificar_aux" title="Link to this definition">¶</a></dt>
+<dd><p>Se encarga de solicitar la modificacion de un registro al modelo, con los datos ingresados y el registro seleccionado del treeview.
+«modificar» es una funcion del modelo.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vista.Vista.ventana_principal">
-<span class="sig-name descname"><span class="pre">ventana_principal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modificar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">borrar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insertar_datos_default</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resetear_tabla</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vista.html#Vista.ventana_principal"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#vista.Vista.ventana_principal" title="Link to this definition">¶</a></dt>
-<dd><p>Genera la vista principal.</p>
-<p>alta, modificar, borrar, insertar_datos_default y resetear_tabla son funciones</p>
+<span class="sig-name descname"><span class="pre">ventana_principal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modificar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">borrar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insertar_datos_default</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resetear_tabla</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Treeview</span></span></span><a class="reference internal" href="_modules/vista.html#Vista.ventana_principal"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#vista.Vista.ventana_principal" title="Link to this definition">¶</a></dt>
+<dd><p>Genera la vista principal.
+Utiliza las funciones “alta”, “modificar”, “borrar”, “insertar_datos_default” y “resetear_tabla” del modelo.</p>
 </dd></dl>
 
 </dd></dl>
@@ -86,6 +102,7 @@
 <li><a class="reference internal" href="#vista.Vista.alta_aux"><code class="docutils literal notranslate"><span class="pre">Vista.alta_aux()</span></code></a></li>
 <li><a class="reference internal" href="#vista.Vista.crear_treeview"><code class="docutils literal notranslate"><span class="pre">Vista.crear_treeview()</span></code></a></li>
 <li><a class="reference internal" href="#vista.Vista.limpiar_campos"><code class="docutils literal notranslate"><span class="pre">Vista.limpiar_campos()</span></code></a></li>
+<li><a class="reference internal" href="#vista.Vista.modificar_aux"><code class="docutils literal notranslate"><span class="pre">Vista.modificar_aux()</span></code></a></li>
 <li><a class="reference internal" href="#vista.Vista.ventana_principal"><code class="docutils literal notranslate"><span class="pre">Vista.ventana_principal()</span></code></a></li>
 </ul>
 </li>

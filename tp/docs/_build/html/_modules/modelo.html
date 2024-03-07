@@ -35,9 +35,10 @@
           <div class="body" role="main">
             
   <h1>Código fuente para modelo</h1><div class="highlight"><pre>
-<span></span><span class="c1"># ##############################################</span>
-<span class="c1"># MODELO</span>
-<span class="c1"># ##############################################</span>
+<span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">	modelo.py:</span>
+<span class="sd">		Representa el modelo logico del programa</span>
+<span class="sd">&#39;&#39;&#39;</span>
 <span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">ttk</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">from</span> <span class="nn">peewee</span> <span class="kn">import</span> <span class="o">*</span>
@@ -51,34 +52,38 @@
         <span class="n">database</span> <span class="o">=</span> <span class="n">base_sqlite</span></div>
 
 
+
 <div class="viewcode-block" id="Estudiantes">
 <a class="viewcode-back" href="../modelo.html#modelo.Estudiantes">[documentos]</a>
 <span class="k">class</span> <span class="nc">Estudiantes</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">		Clase Estudiantes. La usa el ORM para generar</span>
+<span class="sd">		la tabla de estudiantes en la base de datos.</span>
+<span class="sd">	&#39;&#39;&#39;</span>
     <span class="c1"># id = IntegerField(primary_key = True, )  # no es necesario, el ORM ya le agrega un id llamado &#39;id&#39; por defecto </span>
-    <span class="n">nombre</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">()</span>
-    <span class="n">email</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">()</span>
-    <span class="n">nota</span> <span class="o">=</span> <span class="n">FloatField</span><span class="p">()</span></div>
+	<span class="n">nombre</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">()</span>
+	<span class="n">email</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">()</span>
+	<span class="n">nota</span> <span class="o">=</span> <span class="n">FloatField</span><span class="p">()</span></div>
 
 
 <span class="n">base_sqlite</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
 <span class="n">base_sqlite</span><span class="o">.</span><span class="n">create_tables</span><span class="p">([</span><span class="n">Estudiantes</span><span class="p">])</span>
 
-	
-<span class="c1"># mi modelo original</span>
-
-<span class="c1"># id integer PRIMARY KEY AUTOINCREMENT,</span>
-<span class="c1"># nombre text NOT NULL,</span>
-<span class="c1"># email text NOT NULL,</span>
-<span class="c1"># nota real</span>
-
-
 
 <div class="viewcode-block" id="ManejadorBd">
 <a class="viewcode-back" href="../modelo.html#modelo.ManejadorBd">[documentos]</a>
 <span class="k">class</span> <span class="nc">ManejadorBd</span><span class="p">():</span>
+<span class="w">	</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">		Clase ManejadorBd encargada de realizar</span>
+<span class="sd">		todas las operaciones sobre la base de datos</span>
+<span class="sd">	&#39;&#39;&#39;</span>
 <div class="viewcode-block" id="ManejadorBd.resetear_tabla">
 <a class="viewcode-back" href="../modelo.html#modelo.ManejadorBd.resetear_tabla">[documentos]</a>
 	<span class="k">def</span> <span class="nf">resetear_tabla</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">			Borra la tabla y la vuelve a crear vacia.</span>
+<span class="sd">		&#39;&#39;&#39;</span>
+
 		<span class="n">base_sqlite</span><span class="o">.</span><span class="n">drop_tables</span><span class="p">([</span><span class="n">Estudiantes</span><span class="p">])</span>
 		<span class="n">base_sqlite</span><span class="o">.</span><span class="n">create_tables</span><span class="p">([</span><span class="n">Estudiantes</span><span class="p">])</span>
 		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;reseteando BD y actualizando vista&#39;</span><span class="p">)</span></div>
@@ -87,6 +92,10 @@
 <div class="viewcode-block" id="ManejadorBd.insertar_datos_default">
 <a class="viewcode-back" href="../modelo.html#modelo.ManejadorBd.insertar_datos_default">[documentos]</a>
 	<span class="k">def</span> <span class="nf">insertar_datos_default</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">			Inserta datos dummy en la tabla estudiantes.</span>
+<span class="sd">		&#39;&#39;&#39;</span>
+
 		<span class="bp">self</span><span class="o">.</span><span class="n">insertar_datos</span><span class="p">(</span><span class="s1">&#39;Alan Martinez&#39;</span><span class="p">,</span> <span class="s1">&#39;AlanMartinez@hotmail.com&#39;</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">)</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">insertar_datos</span><span class="p">(</span><span class="s1">&#39;Pedro Villanueva&#39;</span><span class="p">,</span> <span class="s1">&#39;PVNueva66@gmail.com&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">insertar_datos</span><span class="p">(</span><span class="s1">&#39;Maria Benitez&#39;</span><span class="p">,</span> <span class="s1">&#39;Mbtez@gmail.com&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
@@ -98,15 +107,22 @@
 <div class="viewcode-block" id="ManejadorBd.traer_datos">
 <a class="viewcode-back" href="../modelo.html#modelo.ManejadorBd.traer_datos">[documentos]</a>
 	<span class="k">def</span> <span class="nf">traer_datos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">			Trae todos los datos de la tabla estudiantes.</span>
+<span class="sd">			Devuelve un objeto de tipo &lt;class &#39;peewee.ModelSelect&#39;&gt;</span>
+<span class="sd">		&#39;&#39;&#39;</span>
+
 		<span class="n">resultado</span> <span class="o">=</span> <span class="n">Estudiantes</span><span class="o">.</span><span class="n">select</span><span class="p">()</span>
-		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;type(resultado):&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">resultado</span><span class="p">))</span> <span class="c1"># test       &lt;class &#39;peewee.ModelSelect&#39;&gt;</span>
-		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;resultado&#39;</span><span class="p">,</span> <span class="n">resultado</span><span class="p">)</span> <span class="c1"># test</span>
 		<span class="k">return</span> <span class="n">resultado</span></div>
 
 	
 <div class="viewcode-block" id="ManejadorBd.insertar_datos">
 <a class="viewcode-back" href="../modelo.html#modelo.ManejadorBd.insertar_datos">[documentos]</a>
 	<span class="k">def</span> <span class="nf">insertar_datos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">nota</span><span class="p">:</span><span class="nb">float</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">			Inserta un nuevo registro en la tabla estudiantes.</span>
+<span class="sd">		&#39;&#39;&#39;</span>
+
 		<span class="n">estudiante</span> <span class="o">=</span> <span class="n">Estudiantes</span><span class="p">()</span>
 		<span class="n">estudiante</span><span class="o">.</span><span class="n">nombre</span> <span class="o">=</span> <span class="n">nombre</span>
 		<span class="n">estudiante</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">email</span>
@@ -117,6 +133,10 @@
 <div class="viewcode-block" id="ManejadorBd.modificar_datos">
 <a class="viewcode-back" href="../modelo.html#modelo.ManejadorBd.modificar_datos">[documentos]</a>
 	<span class="k">def</span> <span class="nf">modificar_datos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">nombre</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">nota</span><span class="p">:</span><span class="nb">float</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">			Modifica el registro de la tabla estudiantes, con los datos ingresados, segun el id pasado por parametro.</span>
+<span class="sd">		&#39;&#39;&#39;</span>
+
 		<span class="n">actualizar</span> <span class="o">=</span> <span class="n">Estudiantes</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">nombre</span><span class="o">=</span><span class="n">nombre</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span> <span class="n">nota</span><span class="o">=</span><span class="n">nota</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Estudiantes</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="nb">id</span><span class="p">)</span>
 		<span class="n">actualizar</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span></div>
 
@@ -124,10 +144,9 @@
 <div class="viewcode-block" id="ManejadorBd.eliminar_datos">
 <a class="viewcode-back" href="../modelo.html#modelo.ManejadorBd.eliminar_datos">[documentos]</a>
 	<span class="k">def</span> <span class="nf">eliminar_datos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
-		<span class="c1">#registro_a_borrar = Estudiantes.get( Estudiantes.id == id ) #type: Estudiantes</span>
-		<span class="c1">#registro_a_borrar.delete_instance()</span>
-		
-		<span class="c1"># encontre este metodo </span>
+<span class="w">		</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">			Elimina el registro de la tabla estudiante, segun el id pasado por parametro.</span>
+<span class="sd">		&#39;&#39;&#39;</span>
 		<span class="n">Estudiantes</span><span class="o">.</span><span class="n">delete_by_id</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span></div>
 </div>
 
@@ -135,13 +154,21 @@
 <div class="viewcode-block" id="Modelo">
 <a class="viewcode-back" href="../modelo.html#modelo.Modelo">[documentos]</a>
 <span class="k">class</span> <span class="nc">Modelo</span><span class="p">():</span>
+<span class="w">	</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">		Clase correspondiente al Modelo. Utiliza un manejador de bases de datos</span>
+<span class="sd">		llamando al constructor de la clase ManejadorBd</span>
+<span class="sd">	&#39;&#39;&#39;</span>
 	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">bd</span> <span class="o">=</span> <span class="n">ManejadorBd</span><span class="p">()</span>
 
 <div class="viewcode-block" id="Modelo.actualizar_treeview">
 <a class="viewcode-back" href="../modelo.html#modelo.Modelo.actualizar_treeview">[documentos]</a>
 	<span class="k">def</span> <span class="nf">actualizar_treeview</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mi_treeview</span><span class="p">:</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">):</span>
-<span class="w">		</span><span class="sd">&#39;&#39;&#39;Actualiza la vista&#39;&#39;&#39;</span>
+<span class="w">		</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">			Llama al metodo &quot;traer_datos&quot; del manejador de base de datos y</span>
+<span class="sd">			actualiza el treeview de la ventana principal.</span>
+<span class="sd">		&#39;&#39;&#39;</span>
+
 		<span class="n">hijos</span> <span class="o">=</span> <span class="n">mi_treeview</span><span class="o">.</span><span class="n">get_children</span><span class="p">()</span>
 		<span class="k">for</span> <span class="n">hijo</span> <span class="ow">in</span> <span class="n">hijos</span><span class="p">:</span>
 			<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hijo de treeview a borrar: &#39;</span><span class="p">,</span> <span class="n">hijo</span><span class="p">)</span>
@@ -155,17 +182,24 @@
 
 
 
-	<span class="c1"># TODO 1: Areglar return para que devuelva el mensaje del print en una warning.</span>
-	<span class="c1"># TODO 2: Agregar filtro para &#39;nota&#39; que sea perteneciente al intervalo [0.0, 10.0] unicamente</span>
-	<span class="c1"># TODO 3: Agregar filtro para &#39;nombre&#39; similar a email con regex.</span>
 <div class="viewcode-block" id="Modelo.alta">
 <a class="viewcode-back" href="../modelo.html#modelo.Modelo.alta">[documentos]</a>
 	<span class="k">def</span> <span class="nf">alta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">nota</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">tree</span><span class="p">:</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">):</span>
-<span class="w">		</span><span class="sd">&#39;&#39;&#39; Realiza el alta del estudiante. Devuelve True/False &#39;&#39;&#39;</span>
+<span class="w">		</span><span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">			Llama al metodo &quot;insertar_datos&quot; del manejador de base de datos para </span>
+<span class="sd">			realizar el alta del estudiante.</span>
+<span class="sd">			Devuelve True si se dio el alta correctamente o False si no se pudo dar de alta el registro.</span>
+<span class="sd">		&#39;&#39;&#39;</span>
+
 		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Entrando ALTA&#39;</span><span class="p">)</span>
 		<span class="k">if</span><span class="p">(</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">validar_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span> <span class="p">):</span>
 			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;error en campo email: &#39;</span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="s2">&#39; no es una direccion de email valida&quot;</span><span class="p">)</span>
 			<span class="k">return</span> <span class="kc">False</span>
+		
+		<span class="k">if</span><span class="p">(</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">validar_nombre</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span> <span class="p">):</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;error en campo nombre: &#39;</span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s2">&#39; no es un nombre de estudiante valido.&quot;</span><span class="p">)</span>
+			<span class="k">return</span> <span class="kc">False</span>
+		
 		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;nombre:&#39;</span><span class="p">,</span> <span class="n">nombre</span><span class="p">,</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;email:&#39;</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;nota:&#39;</span><span class="p">,</span> <span class="n">nota</span><span class="p">)</span>
 
 		<span class="bp">self</span><span class="o">.</span><span class="n">bd</span><span class="o">.</span><span class="n">insertar_datos</span><span class="p">(</span><span class="n">nombre</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">nota</span><span class="p">)</span>
@@ -174,35 +208,59 @@
 		<span class="bp">self</span><span class="o">.</span><span class="n">actualizar_treeview</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
 		<span class="k">return</span> <span class="kc">True</span></div>
 
-			
+
+<div class="viewcode-block" id="Modelo.validar_nombre">
+<a class="viewcode-back" href="../modelo.html#modelo.Modelo.validar_nombre">[documentos]</a>
+	<span class="k">def</span> <span class="nf">validar_nombre</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">			Valida si el nombre del estudiante coincide con el patron esperado.</span>
+<span class="sd">			Devuelve algo analogo a TRUE si el nombre contiene caracteres a-z y no termina ni comienza en espacios.</span>
+<span class="sd">		&#39;&#39;&#39;</span>
+
+		<span class="n">PATRON</span> <span class="o">=</span> <span class="s1">&#39;^[A-Za-z]+(?:[ _-][A-Za-z]+)*$$&#39;</span>  <span class="c1">#regex para el nombre del alumno</span>
+		<span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">PATRON</span><span class="p">,</span> <span class="n">nombre</span><span class="p">)</span> </div>
+
+
 <div class="viewcode-block" id="Modelo.validar_email">
 <a class="viewcode-back" href="../modelo.html#modelo.Modelo.validar_email">[documentos]</a>
 	<span class="k">def</span> <span class="nf">validar_email</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
 <span class="w">		</span><span class="sd">&#39;&#39;&#39; </span>
-<span class="sd">		Devuelve algo analogo a TRUE si el email es una </span>
-<span class="sd">		direccion de email VALIDA y algo analogo a FALSE si no lo es</span>
+<span class="sd">			Valida si el mail del estudiante coincide con el patron esperado para un mail.</span>
+<span class="sd">			Devuelve algo analogo a TRUE si el email es una </span>
+<span class="sd">			direccion de email VALIDA y algo analogo a FALSE si no lo es</span>
 <span class="sd">		&#39;&#39;&#39;</span>
+
 		<span class="n">PATRON</span> <span class="o">=</span> <span class="s1">&#39;^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$&#39;</span>  <span class="c1">#regex para el email</span>
 		<span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">PATRON</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span> </div>
 
 			
 <div class="viewcode-block" id="Modelo.modificar">
 <a class="viewcode-back" href="../modelo.html#modelo.Modelo.modificar">[documentos]</a>
-	<span class="k">def</span> <span class="nf">modificar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">nota</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">tree</span><span class="p">:</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">):</span> <span class="c1"># TODO</span>
+	<span class="k">def</span> <span class="nf">modificar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">nota</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">tree</span><span class="p">:</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">):</span> 
+<span class="w">		</span><span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">			Llama al metodo &quot;modificar_datos&quot; del manejador de base de datos para</span>
+<span class="sd">			realizar la modificacion del estudiante seleccionado. </span>
+<span class="sd">			Devuelve True si se modifico correctamente el registro o False si no se pudo modificar el registro.</span>
+<span class="sd">		&#39;&#39;&#39;</span>
+
 		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Entrando a MODIFICAR&#39;</span><span class="p">)</span>
 
 		<span class="n">valor_seleccionado</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">selection</span><span class="p">()</span>
 		<span class="k">if</span> <span class="ow">not</span> <span class="n">valor_seleccionado</span><span class="p">:</span>
 			<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;NO SE SELECCIONO NADA&#39;</span><span class="p">)</span>
-			<span class="k">return</span>
+			<span class="k">return</span> <span class="kc">False</span>
 		
 		<span class="k">if</span><span class="p">(</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">validar_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span> <span class="p">):</span>
 			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;error en campo email: &#39;</span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="s2">&#39; no es una direccion de email valida&quot;</span><span class="p">)</span>
-			<span class="k">return</span>	
+			<span class="k">return</span> <span class="kc">False</span>
 		
-		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;valor_seleccionado&#39;</span><span class="p">,</span><span class="n">valor_seleccionado</span><span class="p">)</span>   <span class="c1">#(&#39;I005&#39;,)</span>
+		<span class="k">if</span><span class="p">(</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">validar_nombre</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span> <span class="p">):</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;error en campo nombre: &#39;</span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s2">&#39; no es un nombre de estudiante valido.&quot;</span><span class="p">)</span>
+			<span class="k">return</span> <span class="kc">False</span>
+		
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;valor_seleccionado&#39;</span><span class="p">,</span><span class="n">valor_seleccionado</span><span class="p">)</span>
 		<span class="n">item</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">valor_seleccionado</span><span class="p">)</span>
-		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;item&#39;</span><span class="p">,</span><span class="n">item</span><span class="p">)</span>    <span class="c1"># item {&#39;text&#39;: 26, &#39;image&#39;: &#39;&#39;, &#39;values&#39;: [&#39;Alfredo Gomez&#39;, &#39;GAlfredo@s&#39;: &#39;&#39;}</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;item&#39;</span><span class="p">,</span><span class="n">item</span><span class="p">)</span>
 
 		<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;item[&#39;text&#39;]&quot;</span><span class="p">,</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
 		<span class="n">mi_id</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
@@ -214,21 +272,27 @@
 		<span class="bp">self</span><span class="o">.</span><span class="n">bd</span><span class="o">.</span><span class="n">modificar_datos</span><span class="p">(</span><span class="n">mi_id</span><span class="p">,</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">nota</span><span class="p">)</span>
 
 		<span class="bp">self</span><span class="o">.</span><span class="n">actualizar_treeview</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
-		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;FIN MODIFICAR&#39;</span><span class="p">)</span></div>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Modificacion Exitosa&#39;</span><span class="p">)</span>
+		<span class="k">return</span> <span class="kc">True</span></div>
 
 		
 
 <div class="viewcode-block" id="Modelo.borrar">
 <a class="viewcode-back" href="../modelo.html#modelo.Modelo.borrar">[documentos]</a>
 	<span class="k">def</span> <span class="nf">borrar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree</span><span class="p">:</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">			Llama al metodo &quot;eliminar_datos&quot; del manejador de base de datos para </span>
+<span class="sd">			realizar el borrado del estudiante seleccionado. En caso de no seleccionar nada, se envia una alerta por pantalla.</span>
+<span class="sd">		&#39;&#39;&#39;</span>
+		
 		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Entrando a BORRAR&#39;</span><span class="p">)</span>
 		<span class="n">valor_seleccionado</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">selection</span><span class="p">()</span> 
 		<span class="k">if</span> <span class="ow">not</span> <span class="n">valor_seleccionado</span><span class="p">:</span>
 			<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;NO SE SELECCIONO NADA&#39;</span><span class="p">)</span>
 			<span class="k">return</span>
-		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;valor_seleccionado&#39;</span><span class="p">,</span><span class="n">valor_seleccionado</span><span class="p">)</span>   <span class="c1">#(&#39;I005&#39;,)</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;valor_seleccionado&#39;</span><span class="p">,</span><span class="n">valor_seleccionado</span><span class="p">)</span>
 		<span class="n">item</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">valor_seleccionado</span><span class="p">)</span>
-		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;item&#39;</span><span class="p">,</span><span class="n">item</span><span class="p">)</span>    <span class="c1">#{&#39;text&#39;: 5, &#39;image&#39;: &#39;&#39;, &#39;values&#39;: [&#39;daSDasd&#39;, &#39;13.0&#39;, &#39;2.0&#39;], &#39;open&#39;: 0, &#39;tags&#39;: &#39;&#39;}</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;item&#39;</span><span class="p">,</span><span class="n">item</span><span class="p">)</span>
 		<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;item[&#39;text&#39;]&quot;</span><span class="p">,</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
 		<span class="n">mi_id</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
 		
@@ -245,6 +309,10 @@
 <div class="viewcode-block" id="Modelo.insertar_datos_default">
 <a class="viewcode-back" href="../modelo.html#modelo.Modelo.insertar_datos_default">[documentos]</a>
 	<span class="k">def</span> <span class="nf">insertar_datos_default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree</span><span class="p">:</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">			Llama al metodo &quot;insertar_datos_default&quot; del manejador de base de datos para insertar datos dummy.</span>
+<span class="sd">		&#39;&#39;&#39;</span>
+		
 		<span class="bp">self</span><span class="o">.</span><span class="n">bd</span><span class="o">.</span><span class="n">insertar_datos_default</span><span class="p">()</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">actualizar_treeview</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span></div>
 
@@ -252,6 +320,10 @@
 <div class="viewcode-block" id="Modelo.resetear_tabla">
 <a class="viewcode-back" href="../modelo.html#modelo.Modelo.resetear_tabla">[documentos]</a>
 	<span class="k">def</span> <span class="nf">resetear_tabla</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree</span><span class="p">:</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">			Llama al metodo &quot;resetear_tabla&quot; del manejador de base de datos para borrar la tabla y volver a crearla vacia.</span>
+<span class="sd">		&#39;&#39;&#39;</span>
+
 		<span class="bp">self</span><span class="o">.</span><span class="n">bd</span><span class="o">.</span><span class="n">resetear_tabla</span><span class="p">()</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">actualizar_treeview</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span></div>
 </div>
