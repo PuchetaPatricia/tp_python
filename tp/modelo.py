@@ -11,11 +11,12 @@ class BaseModel(Model):
     class Meta:
         database = base_sqlite
 
+
 class Estudiantes(BaseModel):
     # id = IntegerField(primary_key = True, )  # no es necesario, el ORM ya le agrega un id llamado 'id' por defecto 
-    nombre = CharField()
-    email = CharField()
-    nota = FloatField()
+	nombre = CharField()
+	email = CharField()
+	nota = FloatField()
 
 base_sqlite.connect()
 base_sqlite.create_tables([Estudiantes])
@@ -32,11 +33,19 @@ base_sqlite.create_tables([Estudiantes])
 
 class ManejadorBd():
 	def resetear_tabla(self):
+		'''
+			Borra la tabla y la vuelve a crear vacia.
+		'''
+
 		base_sqlite.drop_tables([Estudiantes])
 		base_sqlite.create_tables([Estudiantes])
 		print('reseteando BD y actualizando vista')
 		
 	def insertar_datos_default(self):
+		'''
+			Inserta datos dummy en la tabla estudiantes.
+		'''
+
 		self.insertar_datos('Alan Martinez', 'AlanMartinez@hotmail.com', 6.5)
 		self.insertar_datos('Pedro Villanueva', 'PVNueva66@gmail.com', 9)
 		self.insertar_datos('Maria Benitez', 'Mbtez@gmail.com', 10)
@@ -45,12 +54,21 @@ class ManejadorBd():
 		self.insertar_datos('Alfredo Gomez', 'GAlfredo@outlook.com.br', 8)
 		
 	def traer_datos(self):
+		'''
+			Trae todos los datos de la tabla estudiantes.
+			Devuelve un objeto de tipo <class 'peewee.ModelSelect'>
+		'''
+
 		resultado = Estudiantes.select()
 		print('type(resultado):', type(resultado)) # test       <class 'peewee.ModelSelect'>
 		print('resultado', resultado) # test
 		return resultado
 	
 	def insertar_datos(self, nombre:str, email:str, nota:float):
+		'''
+			Inserta un nuevo registro en la tabla estudiantes.
+		'''
+
 		estudiante = Estudiantes()
 		estudiante.nombre = nombre
 		estudiante.email = email
@@ -58,10 +76,18 @@ class ManejadorBd():
 		estudiante.save()
 
 	def modificar_datos(self, id, nombre:str, email:str, nota:float):
+		'''
+			Modifica el registro de la tabla estudiantes, con los datos ingresados, segun el id pasado por parametro.
+		'''
+
 		actualizar = Estudiantes.update(nombre=nombre, email=email, nota=nota).where(Estudiantes.id == id)
 		actualizar.execute()
 
 	def eliminar_datos(self, id):
+		'''
+			Elimina el registro de la tabla estudiante, segun el id pasado por parametro.
+		'''
+
 		#registro_a_borrar = Estudiantes.get( Estudiantes.id == id ) #type: Estudiantes
 		#registro_a_borrar.delete_instance()
 		
@@ -73,7 +99,11 @@ class Modelo():
 		self.bd = ManejadorBd()
 
 	def actualizar_treeview(self, mi_treeview: ttk.Treeview):
-		'''Actualiza la vista'''
+		'''
+			Llama al metodo "traer_datos" del manejador de base de datos y
+			actualiza el treeview de la ventana principal.
+		'''
+
 		hijos = mi_treeview.get_children()
 		for hijo in hijos:
 			print('Hijo de treeview a borrar: ', hijo)
@@ -86,10 +116,13 @@ class Modelo():
 			mi_treeview.insert("", 0, text=fila.id, values=(fila.nombre, fila.email, fila.nota))
 
 
-	# TODO 1: Areglar return para que devuelva el mensaje del print en una warning.
-	# TODO 2: Agregar filtro para 'nota' que sea perteneciente al intervalo [0.0, 10.0] unicamente
 	def alta(self, nombre:str, email:str, nota:float, tree: ttk.Treeview):
-		''' Realiza el alta del estudiante. Devuelve True/False '''
+		''' 
+			Llama al metodo "insertar_datos" del manejador de base de datos para 
+			realizar el alta del estudiante. 
+			Devuelve True si se dio el alta correctamente o False si no se pudo dar de alta el registro.
+		'''
+
 		print('Entrando ALTA')
 		if( not self.validar_email(email) ):
 			print(f"error en campo email: '{email}' no es una direccion de email valida")
@@ -109,21 +142,30 @@ class Modelo():
 
 	def validar_nombre(self, nombre:str):
 		''' 
-		Devuelve algo analogo a TRUE si el nombre contiene caracteres a-z y no termina ni comienza en espacios.
+			Valida si el nombre del estudiante coincide con el patron esperado.
+			Devuelve algo analogo a TRUE si el nombre contiene caracteres a-z y no termina ni comienza en espacios.
 		'''
+
 		PATRON = '^[A-Za-z]+(?:[ _-][A-Za-z]+)*$$'  #regex para el nombre del alumno
 		return re.match(PATRON, nombre) 
 
 	def validar_email(self, email:str):
 		''' 
-		Devuelve algo analogo a TRUE si el email es una 
-		direccion de email VALIDA y algo analogo a FALSE si no lo es
+			Valida si el mail del estudiante coincide con el patron esperado para un mail.
+			Devuelve algo analogo a TRUE si el email es una 
+			direccion de email VALIDA y algo analogo a FALSE si no lo es
 		'''
+
 		PATRON = '^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$'  #regex para el email
 		return re.match(PATRON, email) 
 			
 	def modificar(self, nombre:str, email:str, nota:float, tree: ttk.Treeview): 
-		''' Realiza la modificacion del estudiante. Devuelve True/False '''
+		''' 
+			Llama al metodo "modificar_datos" del manejador de base de datos para
+			realizar la modificacion del estudiante seleccionado. 
+			Devuelve True si se modifico correctamente el registro o False si no se pudo modificar el registro.
+		'''
+
 		print('Entrando a MODIFICAR')
 
 		valor_seleccionado = tree.selection()
@@ -158,6 +200,11 @@ class Modelo():
 		
 
 	def borrar(self, tree: ttk.Treeview):
+		'''
+			Llama al metodo "eliminar_datos" del manejador de base de datos para 
+			realizar el borrado del estudiante seleccionado. En caso de no seleccionar nada, se envia una alerta por pantalla.
+		'''
+		
 		print('Entrando a BORRAR')
 		valor_seleccionado = tree.selection() 
 		if not valor_seleccionado:
@@ -179,9 +226,17 @@ class Modelo():
 		print('FIN BORRAR')
 
 	def insertar_datos_default(self, tree: ttk.Treeview):
+		'''
+			Llama al metodo "insertar_datos_default" del manejador de base de datos para insertar datos dummy
+		'''
+		
 		self.bd.insertar_datos_default()
 		self.actualizar_treeview(tree)
 
 	def resetear_tabla(self, tree: ttk.Treeview):
+		'''
+			Llama al metodo "resetear_tabla" del manejador de base de datos para borrar la tabla y volver a crearla vacia.
+		'''
+
 		self.bd.resetear_tabla()
 		self.actualizar_treeview(tree)

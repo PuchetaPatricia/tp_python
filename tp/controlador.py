@@ -12,6 +12,10 @@ class Controlador():
 		self.v = vista
 
 	def iniciar_ejecucion(self):
+		'''
+			Crea y actualiza la ventana principal de la aplicacion e 
+			inicia la ejecucion de la aplicacion.
+		'''
 		root_tk = Tk()
 
 		tree = self.v.ventana_principal(root_tk, self.m.alta, self.m.modificar, self.m.borrar, self.m.insertar_datos_default, self.m.resetear_tabla) # vista, devuelve objeto treeview
