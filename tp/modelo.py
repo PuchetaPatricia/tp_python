@@ -35,7 +35,7 @@ class ManejadorBd():
 	def resetear_tabla(self):
 		'''
 		Borra la tabla y la vuelve a crear vacia.
-  		:returns: None
+  		:return: None
 		'''
 
 		base_sqlite.drop_tables([Estudiantes])
@@ -55,7 +55,7 @@ class ManejadorBd():
 		self.insertar_datos('Josefina Cordara', 'JCor95@yahoo.com', 0)
 		self.insertar_datos('Alfredo Gomez', 'GAlfredo@outlook.com.br', 8)
 		
-	def traer_datos(self) -> ModelSelect:
+	def traer_datos(self):
 		'''
 		Trae todos los datos de la tabla estudiantes.
 		:returns: objeto de tipo <class 'peewee.ModelSelect'>
