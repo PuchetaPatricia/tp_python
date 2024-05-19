@@ -2,9 +2,17 @@
 	vista.py:
 		Representa la interfaz del programa con el usuario
 '''
+import os
+import sys
 from tkinter import Tk, Label, W, E, Entry, Button, StringVar, DoubleVar, ttk
 from tkinter.messagebox import showinfo, showwarning
 from modelo import Modelo
+
+from pathlib import Path
+import subprocess
+import threading
+
+theproc=""
 
 class Vista():
 	'''
@@ -13,6 +21,13 @@ class Vista():
 	'''
 	def __init__(self):
 		self.objeto_Crud = Modelo()
+
+		#PASO 1 - AGREGO RUTA A SERVIDOR
+		self.raiz = Path(__file__).resolve().parent
+		self.ruta_server = os.path.join(self.raiz, 'udp_server_t.py')
+
+		self.try_connection()
+
 		
 	def limpiar_campos(self, nombre:StringVar, email:StringVar, nota:DoubleVar):
 		'''
@@ -140,3 +155,27 @@ class Vista():
 		boton_reset.grid(row = 7, column = 3)
 
 		return tree
+	
+	def try_connection(self, ):
+		print("Prediendo Servidor")
+		if theproc != "":
+			theproc.kill()
+			threading.Thread(target=self.lanzar_servidor, args=(True,), daemon=True).start()
+		else:
+			threading.Thread(target=self.lanzar_servidor, args=(True,), daemon=True).start()
+	
+	def lanzar_servidor(self, var):
+		the_path =  self.ruta_server
+		if var==True:
+			global theproc
+			theproc = subprocess.Popen([sys.executable, the_path])
+			theproc.communicate()
+		else:
+			print("")
+
+    # =================== INNIT AND STOP SERVER ====================== 
+	def stop_server(self, ):
+		global theproc
+		if theproc !="":
+			theproc.kill() 
+			print("Apagando Servidor")
