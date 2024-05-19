@@ -4,7 +4,62 @@
 '''
 from tkinter import ttk
 import re
+import os
 from peewee import *
+from datetime import datetime
+
+# ***** DECORADORES *****
+
+# Decorador para el metodo alta
+def decorador_ingreso_registro(func):
+    def envoltura(*args, **kwargs):
+        data_ejecucion = func(*args, **kwargs)
+        if data_ejecucion:
+            print("Se ejecuto el metodo de alta")
+            guardar_log(func.__name__, data_ejecucion)
+        else:
+            return data_ejecucion
+
+    return envoltura
+
+# Decorador para el metodo de borrado
+def decorador_eliminar_registro(func):
+    def envoltura(*args, **kwargs):
+        data_ejecucion = func(*args, **kwargs)
+        if data_ejecucion != None:
+            print("Se ejecuto el metodo de borrado")
+            guardar_log(func.__name__, data_ejecucion)
+        else:
+            return data_ejecucion
+    return envoltura
+
+# Decorador para el metodo modificar
+def decorador_actualizacion_registro(func):
+    def envoltura(*args, **kwargs):
+        data_ejecucion = func(*args, **kwargs)
+        if data_ejecucion != False:
+            print("Se ejecuto el metodo modificar")
+            guardar_log(func.__name__, data_ejecucion)
+        else:
+            return data_ejecucion
+    return envoltura
+
+
+# Funcion para guardar un log en un archivo txt
+def guardar_log(parameter, data):
+    BASE_DIR = os.path.dirname((os.path.abspath(__file__)))
+    ruta = os.path.join(BASE_DIR, "logs.txt")
+    log_function = open(ruta, "a")
+    print(
+        datetime.now().strftime("%H:%M:%S--%d/%m/%y"),
+        "- Se utilizo el metodo",
+        parameter,
+        "\nDatos:",
+        data,
+        "\n",
+        file=log_function,
+    )
+
 
 base_sqlite = SqliteDatabase('base_sqlite.db')
 
@@ -112,7 +167,7 @@ class Modelo():
 			print('fila',fila)
 			mi_treeview.insert("", 0, text=fila.id, values=(fila.nombre, fila.email, fila.nota))
 
-
+	@decorador_ingreso_registro
 	def alta(self, nombre:str, email:str, nota:float, tree: ttk.Treeview):
 		''' 
 			Llama al metodo "insertar_datos" del manejador de base de datos para 
@@ -135,7 +190,7 @@ class Modelo():
 
 		print("Alta exitosa")
 		self.actualizar_treeview(tree)
-		return True
+		return 'Nombre: ' + nombre + ' Email: ' + email + ' Nota: ' + str(nota)
 
 	def validar_nombre(self, nombre:str):
 		''' 
@@ -156,6 +211,7 @@ class Modelo():
 		PATRON = '^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$'  #regex para el email
 		return re.match(PATRON, email) 
 			
+	@decorador_actualizacion_registro
 	def modificar(self, nombre:str, email:str, nota:float, tree: ttk.Treeview): 
 		''' 
 			Llama al metodo "modificar_datos" del manejador de base de datos para
@@ -193,9 +249,9 @@ class Modelo():
 
 		self.actualizar_treeview(tree)
 		print('Modificacion Exitosa')
-		return True
+		return   'Id: ' + str(mi_id) + ' Nombre: ' + nombre + ' Email: ' + email + ' Nota: ' + str(nota)
 		
-
+	@decorador_eliminar_registro
 	def borrar(self, tree: ttk.Treeview):
 		'''
 			Llama al metodo "eliminar_datos" del manejador de base de datos para 
@@ -206,7 +262,7 @@ class Modelo():
 		valor_seleccionado = tree.selection() 
 		if not valor_seleccionado:
 			print('NO SE SELECCIONO NADA')
-			return
+			return 
 		print('valor_seleccionado',valor_seleccionado)
 		item = tree.item(valor_seleccionado)
 		print('item',item)
@@ -221,6 +277,8 @@ class Modelo():
 		self.bd.eliminar_datos(mi_id)
 		tree.delete(valor_seleccionado)
 		print('FIN BORRAR')
+		return 'Id: ' + str(item['text']) + ' Nombre: ' + item['values'][0] + ' Email: ' + item['values'][1]  + ' Nota: ' + str(item['values'][2] )
+		
 
 	def insertar_datos_default(self, tree: ttk.Treeview):
 		'''

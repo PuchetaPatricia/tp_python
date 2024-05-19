@@ -1,0 +1,9 @@
+21:44:24--18/05/24 - Se utilizo el metodo alta 
+Datos: Nombre: patricia Email: p@gmail.com Nota: 8.0 
+
+21:44:53--18/05/24 - Se utilizo el metodo modificar 
+Datos: Id: 5 Nombre: Patricia Email: p@gmail.com Nota: 6.0 
+
+21:45:11--18/05/24 - Se utilizo el metodo borrar 
+Datos: Id: 3 Nombre: Maria Benitez Email: Mbtez@gmail.com Nota: 10.0 
+
