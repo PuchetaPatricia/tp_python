@@ -36,3 +36,4 @@ class Controlador():
 		self.observador = observador.ConcreteObserverA(self.v.objeto_Crud)
 		self.m.actualizar_treeview(tree) # modelo
 		root_tk.mainloop()
+		self.v.stop_server()
