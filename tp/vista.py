@@ -4,12 +4,16 @@
 '''
 from tkinter import Tk, Label, W, E, Entry, Button, StringVar, DoubleVar, ttk
 from tkinter.messagebox import showinfo, showwarning
+from modelo import Modelo
 
 class Vista():
 	'''
 		Clase Vista. 
 		Administra la vista con la que interactua el usuario.
 	'''
+	def __init__(self):
+		self.objeto_Crud = Modelo()
+		
 	def limpiar_campos(self, nombre:StringVar, email:StringVar, nota:DoubleVar):
 		'''
 			Limpia los campos de los Entry de la ventana principal.
@@ -35,9 +39,7 @@ class Vista():
 				print('ALTA CORRECTA')
 				showinfo('Mensaje','Alta correcta')
 				self.limpiar_campos(nombre, email, nota)
-			# else:
-			# 	print('ALTA FALLIDA')
-			# 	showwarning('Mensaje','Alta fallida')
+
 		except Exception as e:
 			showwarning('Mensaje', f'Alta fallida. Error en el ingreso de datos.')
 			print(f'Excepcion: {e}')
@@ -91,6 +93,7 @@ class Vista():
 			Utiliza las funciones 'alta', 'modificar', 'borrar', 'insertar_datos_default' y 'resetear_tabla' del modelo.
 		'''
 		root.title("CRUD de estudiantes")
+		
 				
 		titulo = Label(root, text = "Ingrese la informacion del alumno", 
 					bg = "dark green", fg = "thistle1", height = 1, width = 60)

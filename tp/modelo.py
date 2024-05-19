@@ -7,6 +7,7 @@ import re
 import os
 from peewee import *
 from datetime import datetime
+from observador import Sujeto, ConcreteObserverA
 
 # ***** DECORADORES *****
 
@@ -15,8 +16,9 @@ def decorador_ingreso_registro(func):
     def envoltura(*args, **kwargs):
         data_ejecucion = func(*args, **kwargs)
         if data_ejecucion:
-            print("Se ejecuto el metodo de alta")
+            print("Decorador -- Se ejecuto el metodo de alta")
             guardar_log(func.__name__, data_ejecucion)
+            print('---'*25)
         else:
             return data_ejecucion
 
@@ -27,8 +29,9 @@ def decorador_eliminar_registro(func):
     def envoltura(*args, **kwargs):
         data_ejecucion = func(*args, **kwargs)
         if data_ejecucion != None:
-            print("Se ejecuto el metodo de borrado")
+            print("Decorador -- Se ejecuto el metodo de borrado")
             guardar_log(func.__name__, data_ejecucion)
+            print('---'*25)
         else:
             return data_ejecucion
     return envoltura
@@ -38,8 +41,9 @@ def decorador_actualizacion_registro(func):
     def envoltura(*args, **kwargs):
         data_ejecucion = func(*args, **kwargs)
         if data_ejecucion != False:
-            print("Se ejecuto el metodo modificar")
+            print("Decorador -- Se ejecuto el metodo modificar")
             guardar_log(func.__name__, data_ejecucion)
+            print('---'*25)
         else:
             return data_ejecucion
     return envoltura
@@ -60,6 +64,8 @@ def guardar_log(parameter, data):
         file=log_function,
     )
 
+
+# ***** BASE *****
 
 base_sqlite = SqliteDatabase('base_sqlite.db')
 
@@ -142,7 +148,7 @@ class ManejadorBd():
 		'''
 		Estudiantes.delete_by_id(id)
 
-class Modelo():
+class Modelo(Sujeto):
 	'''
 		Clase correspondiente al Modelo. Utiliza un manejador de bases de datos
 		llamando al constructor de la clase ManejadorBd
@@ -158,13 +164,13 @@ class Modelo():
 
 		hijos = mi_treeview.get_children()
 		for hijo in hijos:
-			print('Hijo de treeview a borrar: ', hijo)
+			# print('Hijo de treeview a borrar: ', hijo)
 			mi_treeview.delete(hijo)
 
 		resultado = self.bd.traer_datos()
 
 		for fila in resultado:
-			print('fila',fila)
+			# print('fila',fila)
 			mi_treeview.insert("", 0, text=fila.id, values=(fila.nombre, fila.email, fila.nota))
 
 	@decorador_ingreso_registro
@@ -174,7 +180,7 @@ class Modelo():
 			realizar el alta del estudiante.
 			Devuelve True si se dio el alta correctamente o False si no se pudo dar de alta el registro.
 		'''
-
+		print('---'*25)
 		print('Entrando ALTA')
 		if( not self.validar_email(email) ):
 			print(f"error en campo email: '{email}' no es una direccion de email valida")
@@ -190,6 +196,7 @@ class Modelo():
 
 		print("Alta exitosa")
 		self.actualizar_treeview(tree)
+		self.notificar('Alta ' + 'Nombre: ' + nombre + ' Email: ' + email + ' Nota: ' + str(nota))
 		return 'Nombre: ' + nombre + ' Email: ' + email + ' Nota: ' + str(nota)
 
 	def validar_nombre(self, nombre:str):
@@ -218,7 +225,7 @@ class Modelo():
 			realizar la modificacion del estudiante seleccionado. 
 			Devuelve True si se modifico correctamente el registro o False si no se pudo modificar el registro.
 		'''
-
+		print('---'*25)
 		print('Entrando a MODIFICAR')
 
 		valor_seleccionado = tree.selection()
@@ -238,7 +245,6 @@ class Modelo():
 		item = tree.item(valor_seleccionado)
 		print('item',item)
 
-		print("item['text']",item['text'])
 		mi_id = item['text']
 		print(f"Valores del item con id = {item['text']}:")
 		lista_iterable = ['nombre','email','nota']
@@ -249,6 +255,7 @@ class Modelo():
 
 		self.actualizar_treeview(tree)
 		print('Modificacion Exitosa')
+		self.notificar('Modificacion ' + 'Id: ' + str(mi_id) + ' Nombre: ' + nombre + ' Email: ' + email + ' Nota: ' + str(nota))
 		return   'Id: ' + str(mi_id) + ' Nombre: ' + nombre + ' Email: ' + email + ' Nota: ' + str(nota)
 		
 	@decorador_eliminar_registro
@@ -257,7 +264,7 @@ class Modelo():
 			Llama al metodo "eliminar_datos" del manejador de base de datos para 
 			realizar el borrado del estudiante seleccionado. En caso de no seleccionar nada, se envia una alerta por pantalla.
 		'''
-		
+		print('---'*25)
 		print('Entrando a BORRAR')
 		valor_seleccionado = tree.selection() 
 		if not valor_seleccionado:
@@ -266,7 +273,7 @@ class Modelo():
 		print('valor_seleccionado',valor_seleccionado)
 		item = tree.item(valor_seleccionado)
 		print('item',item)
-		print("item['text']",item['text'])
+
 		mi_id = item['text']
 		
 		print(f"Valores del item con id = {item['text']}:")
@@ -277,6 +284,7 @@ class Modelo():
 		self.bd.eliminar_datos(mi_id)
 		tree.delete(valor_seleccionado)
 		print('FIN BORRAR')
+		self.notificar('Borrado ' + 'Id: ' + str(item['text']) + ' Nombre: ' + item['values'][0] + ' Email: ' + item['values'][1]  + ' Nota: ' + str(item['values'][2]))
 		return 'Id: ' + str(item['text']) + ' Nombre: ' + item['values'][0] + ' Email: ' + item['values'][1]  + ' Nota: ' + str(item['values'][2] )
 		
 

@@ -1,0 +1,21 @@
+16:23:17--19/05/24 - Observador 
+Datos: (<observador.ConcreteObserverA object at 0x0000021B4EAFF910>, 'Alta Nombre: vv Email: v@v.com Nota: 0.0') 
+
+16:36:04--19/05/24 - Observador 
+Datos: Borrado Id: 11 Nombre: vv Email: v@v.com Nota: 0.0 
+
+16:36:30--19/05/24 - Observador 
+Datos: Modificacion Id: 10 Nombre: sabri Email: sabri@gmail.com Nota: 9.0 
+
+16:36:53--19/05/24 - Observador 
+Datos: Alta Nombre: Juan Email: j@hotmail.com Nota: 7.0 
+
+16:38:21--19/05/24 - Observador 
+Datos: Borrado Id: 8 Nombre: a Email: a@a.com Nota: 0.0 
+
+16:38:38--19/05/24 - Observador 
+Datos: Alta Nombre: gg Email: gg@g.com Nota: 0.0 
+
+16:38:47--19/05/24 - Observador 
+Datos: Modificacion Id: 12 Nombre: ww Email: gg@g.com Nota: 0.0 
+
