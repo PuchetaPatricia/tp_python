@@ -28,13 +28,16 @@ class Vista():
 
 		try:
 			confirmacion_alta = alta(nombre.get(), email.get(), nota.get(), tree) #type: bool
-			if confirmacion_alta:
+			if confirmacion_alta == False:
+				print('ALTA FALLIDA')
+				showwarning('Mensaje','Alta fallida')
+			else:
 				print('ALTA CORRECTA')
 				showinfo('Mensaje','Alta correcta')
 				self.limpiar_campos(nombre, email, nota)
-			else:
-				print('ALTA FALLIDA')
-				showwarning('Mensaje','Alta fallida')
+			# else:
+			# 	print('ALTA FALLIDA')
+			# 	showwarning('Mensaje','Alta fallida')
 		except Exception as e:
 			showwarning('Mensaje', f'Alta fallida. Error en el ingreso de datos.')
 			print(f'Excepcion: {e}')
@@ -47,13 +50,15 @@ class Vista():
 
 		try:
 			confirmacion_modificar = modificar(nombre.get(), email.get(), nota.get(), tree) #type: bool
-			if confirmacion_modificar:
+
+			if confirmacion_modificar == False:
+				print('MODIFICACION FALLIDA')
+				showwarning('Mensaje','Modificacion fallida')
+			else:
 				print('MODIFICACION CORRECTA')
 				showinfo('Mensaje','Modificacion correcta')
 				self.limpiar_campos(nombre, email, nota)
-			else:
-				print('MODIFICACION FALLIDA')
-				showwarning('Mensaje','Modificacion fallida')
+				
 		except Exception as e:
 			showwarning('Mensaje', f'Modificacion fallida. Error en el ingreso de datos.')
 			print(f'Excepcion: {e}')
