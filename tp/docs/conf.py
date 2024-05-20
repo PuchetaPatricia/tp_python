@@ -13,11 +13,11 @@ sys.path.insert(0 , os.path.abspath('../'))
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'EstudiantesABM'
-copyright = '2024, Alejandro Genolet, Alexis Romaniuk, Nicolas Dorelle, Patricia Pucheta'
-author = 'Alejandro Genolet, Alexis Romaniuk, Nicolas Dorelle, Patricia Pucheta'
+copyright = '2024, Alejandro Genolet, Alexis Romaniuk, Nicolas Dorelle, Patricia Pucheta, Natalia Anselmi'
+author = 'Alejandro Genolet, Alexis Romaniuk, Nicolas Dorelle, Patricia Pucheta, Natalia Anselmi'
 
-version = '1.0.1'
-release = '1.0.1'
+version = '2.0.1'
+release = '2.0.1'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

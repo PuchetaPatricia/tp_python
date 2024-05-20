@@ -23,6 +23,14 @@ Se encuentra disponible documentación adicional en formato HTML para su consult
 [index.html](tp/docs/_build/html/index.html)
 
 ## Colaboradores :blush:
+
+### Versión 1.0.1:
+    Genolet, Alejandro.
+    Romaniuk, Alexis.
+    Dorelle, Nicolas.
+    Pucheta, Patricia.
+
+### Versión 2.0.1:
     Pucheta, Patricia.
     Genolet, Alejandro.
     Anselmi, Natalia.
